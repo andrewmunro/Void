@@ -3,3 +3,17 @@ D:\Void\Blackrain\BlackRain\obj\Debug\BlackRain.GUI.Log.resources
 D:\Void\Blackrain\BlackRain\obj\Debug\BlackRain.GUI.SelectProcess.resources
 D:\Void\Blackrain\BlackRain\obj\Debug\ResGen.read.1.tlog
 D:\Void\Blackrain\BlackRain\obj\Debug\ResGen.write.1.tlog
+I:\Void\Blackrain\obj\Debug\ResolveAssemblyReference.cache
+I:\Void\Blackrain\obj\Debug\BlackRain.GUI.Log.resources
+I:\Void\Blackrain\obj\Debug\BlackRain.GUI.SelectProcess.resources
+I:\Void\Blackrain\obj\Debug\GenerateResource.read.1.tlog
+I:\Void\Blackrain\obj\Debug\ResGen.read.1.tlog
+I:\Void\Blackrain\obj\Debug\GenerateResource.write.1.tlog
+I:\Void\Blackrain\obj\Debug\ResGen.write.1.tlog
+I:\Void\Blackrain\bin\Debug\BlackRain.XML
+I:\Void\Blackrain\bin\Debug\BlackRain.dll
+I:\Void\Blackrain\bin\Debug\BlackRain.pdb
+I:\Void\Blackrain\bin\Debug\BlackMagic.dll
+I:\Void\Blackrain\bin\Debug\fasmdll_managed.dll
+I:\Void\Blackrain\obj\Debug\BlackRain.dll
+I:\Void\Blackrain\obj\Debug\BlackRain.pdb

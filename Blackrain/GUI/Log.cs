@@ -56,5 +56,10 @@ namespace BlackRain.GUI
                 Logging.WriteException(ex);
             }
         }
+
+        private void textLog_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
