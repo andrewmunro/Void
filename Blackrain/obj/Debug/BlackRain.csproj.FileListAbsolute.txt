@@ -1,0 +1,5 @@
+D:\Void\Blackrain\BlackRain\obj\Debug\ResolveAssemblyReference.cache
+D:\Void\Blackrain\BlackRain\obj\Debug\BlackRain.GUI.Log.resources
+D:\Void\Blackrain\BlackRain\obj\Debug\BlackRain.GUI.SelectProcess.resources
+D:\Void\Blackrain\BlackRain\obj\Debug\ResGen.read.1.tlog
+D:\Void\Blackrain\BlackRain\obj\Debug\ResGen.write.1.tlog
