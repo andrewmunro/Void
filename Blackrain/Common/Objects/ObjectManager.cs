@@ -25,7 +25,7 @@ namespace BlackRain.Common.Objects
         /// </summary>
         /// <value>The wow base address.</value>
         /// 19/10/2010 17:30
-        private static uint WowBaseAddress
+        public static uint WowBaseAddress
         {
             get 
             {

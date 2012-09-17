@@ -1,4 +1,5 @@
 ﻿using System.Collections.Specialized;
+using System;
 
 namespace BlackRain.Common.Objects
 {
@@ -93,6 +94,19 @@ namespace BlackRain.Common.Objects
             get { return GetStorageField<int>((uint)Offsets.WowUnitFields.UNIT_FIELD_HEALTH); }
         }
 
+        public void FuckingDumpThatShit()
+        {
+            uint curOffset = (uint)Offsets.WowUnitFields.UNIT_FIELD_TARGET;
+
+            for (int index = 0; index < 50; index++)
+            {
+                curOffset = curOffset + 0x1;
+                int value = GetStorageField<int>((uint)curOffset);
+
+                Console.WriteLine(curOffset.ToString("X4") + " - " + value);
+            }
+        }
+
         /// <summary>
         /// The unit's maximum health.
         /// </summary>
@@ -106,7 +120,7 @@ namespace BlackRain.Common.Objects
         /// </summary>
         public int HealthPercentage
         {
-            get { return (100 * Health) / MaximumHealth; }
+            get { return ((100 * Health) / (MaximumHealth + 1)); }
         }
 
         /// <summary>
@@ -275,9 +289,17 @@ namespace BlackRain.Common.Objects
         /// <summary>
         /// The GUID of the object this unit is targeting.
         /// </summary>
-        public ulong Target
+        public ulong TargetGUID
         {
             get { return GetStorageField<ulong>((uint)Offsets.WowUnitFields.UNIT_FIELD_TARGET); }
+        }
+
+        /// <summary>
+        /// The GUID of the object this unit is targeting.
+        /// </summary>
+        public WowUnit Target
+        {
+            get { return (WowUnit)ObjectManager.Objects.Find(o => o.GUID == TargetGUID); }
         }
 
         /// <summary>

@@ -125,7 +125,7 @@
         protected T GetStorageField<T>(uint field) where T : struct
         {
             field *= 4;
-            var m_pStorage = ObjectManager.Read<uint>(BaseAddress + 0x08);
+            var m_pStorage = ObjectManager.Read<uint>(BaseAddress + 0x8);
 
             // Uses legacy reading because of errors.
             return (T)ObjectManager.Memory.ReadObject(m_pStorage + field, typeof(T));

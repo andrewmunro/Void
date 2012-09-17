@@ -74,6 +74,7 @@ namespace BlackRain.Common
             Name2 = 0xB4,
         }
 
+
         #region <Flags>
 
         [Flags]
@@ -203,21 +204,21 @@ namespace BlackRain.Common
            UNIT_FIELD_CHANNEL_OBJECT = 0x58,
            UNIT_CHANNEL_SPELL = 0x60,
            UNIT_FIELD_BYTES_0 = 0x64,
-           UNIT_FIELD_HEALTH = 0x68,
-           UNIT_FIELD_POWER1 = 0x6C,
-           UNIT_FIELD_POWER2 = 0x70,
-           UNIT_FIELD_POWER3 = 0x74,
-           UNIT_FIELD_POWER4 = 0x78,
-           UNIT_FIELD_POWER5 = 0x7C,
-           UNIT_FIELD_POWER6 = 0x80,
-           UNIT_FIELD_POWER7 = 0x84,
+           UNIT_FIELD_HEALTH = 0x1B,
+           UNIT_FIELD_POWER1 = 0x1C, // Mana
+           UNIT_FIELD_POWER2 = 0x1D, // Rage
+           UNIT_FIELD_POWER3 = 0x1E, // Focus
+           UNIT_FIELD_POWER4 = 0x1F, // Energy
+           UNIT_FIELD_POWER5 = 0x7C, // Happinnes
+           UNIT_FIELD_POWER6 = 0x80, // RunicPower
+           UNIT_FIELD_POWER7 = 0x84, // Runes
            UNIT_FIELD_POWER8 = 0x88,
            UNIT_FIELD_POWER9 = 0x8C,
            UNIT_FIELD_POWER10 = 0x90,
            UNIT_FIELD_POWER11 = 0x94,
-           UNIT_FIELD_MAXHEALTH = 0x98,
-           UNIT_FIELD_MAXPOWER1 = 0x9C,
-           UNIT_FIELD_MAXPOWER2 = 0xA0,
+           UNIT_FIELD_MAXHEALTH = 0x21, // 
+           UNIT_FIELD_MAXPOWER1 = 0x22,
+           UNIT_FIELD_MAXPOWER2 = 0x23,
            UNIT_FIELD_MAXPOWER3 = 0xA4,
            UNIT_FIELD_MAXPOWER4 = 0xA8,
            UNIT_FIELD_MAXPOWER5 = 0xAC,
@@ -275,7 +276,7 @@ namespace BlackRain.Common
            UNIT_FIELD_RESISTANCEBUFFMODSPOSITIVE = 0x1F0,
            UNIT_FIELD_RESISTANCEBUFFMODSNEGATIVE = 0x20C,
            UNIT_FIELD_BASE_MANA = 0x228,
-           UNIT_FIELD_BASE_HEALTH = 0x22C,
+           UNIT_FIELD_BASE_HEALTH = 0x71,
            UNIT_FIELD_BYTES_2 = 0x230,
            UNIT_FIELD_ATTACK_POWER = 0x234,
            UNIT_FIELD_ATTACK_POWER_MOD_POS = 0x238,
