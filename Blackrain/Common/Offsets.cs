@@ -32,10 +32,10 @@ namespace BlackRain.Common
         /// </summary>
         public enum ObjectManager
         {
-            Tls = 0x008BF1A8,
+            Tls = 0xDC9598,
             CurMgr = 0x462C,
-            LocalGuid = 0xB8,
-            FirstObject = 0xB4,
+            LocalGuid = 0xD0,
+            FirstObject = 0xCC,
             NextObject = 0x3C,
         }
 
@@ -55,7 +55,7 @@ namespace BlackRain.Common
         /// </summary>
         public enum WowObject : uint
         {
-            X = 0x898,
+            X = 0x7E0,
             Y = X + 0x4,
             Z = X + 0x8,
             GameObjectX = 0x110,
