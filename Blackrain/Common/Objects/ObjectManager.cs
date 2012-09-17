@@ -90,6 +90,11 @@ namespace BlackRain.Common.Objects
         public static List<WowUnit> Units { get { return GetObjectsOfType<WowUnit>(false, true); } }
 
         /// <summary>
+        /// A list of all units.
+        /// </summary>
+        public static List<WowPlayer> Players { get { return GetObjectsOfType<WowPlayer>(false, true); } }
+
+        /// <summary>
         /// A list of all Game Objects.
         /// </summary>
         public static List<WowGameObject> GameObjects { get { return GetObjectsOfType<WowGameObject>(false, false); } }

@@ -71,7 +71,7 @@ namespace BlackRain.Common.Objects
         {
             get
             {
-                /*
+                
                 uint nMask = ObjectManager.ReadRelative<uint>((uint)Offsets.WowPlayer.NameStore + (uint)Offsets.WowPlayer.NameMask);
                 uint nBase = ObjectManager.ReadRelative<uint>((uint)Offsets.WowPlayer.NameStore + (uint)Offsets.WowPlayer.NameBase);
 
@@ -97,8 +97,8 @@ namespace BlackRain.Common.Objects
                 }
 
                 return ObjectManager.Memory.ReadASCIIString((uint)(nCurrentObject + (uint)Offsets.WowPlayer.NameString), 40);
-                */
-                return ObjectManager.Memory.ReadASCIIString((uint) Offsets.WowPlayer.Name, 40);
+                
+               // return ObjectManager.Memory.ReadASCIIString((uint)0xDC95D8, 40);
             }
         }
 

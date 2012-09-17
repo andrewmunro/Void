@@ -20,10 +20,10 @@ namespace BlackRain.Common
         public enum WowPlayer: uint
         {
             Name = 0x008BF1E0,
-            NameStore = 0x00881988 + 0x8,
-            NameMask = 0x24,
-            NameBase = 0x1C, 
-            NameString = 0x20 
+            NameStore = 0xBB6F50 + 0x8,
+            NameMask = 0x024,
+            NameBase = 0x01c,
+            NameString = 0x21 
         }
 
         /// <summary>
