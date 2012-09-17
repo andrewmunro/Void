@@ -252,7 +252,7 @@ namespace BlackRain.Common.Objects
         public virtual string Name
         {
             get {
-                return ObjectManager.Memory.ReadASCIIString(ObjectManager.Memory.ReadUInt(ObjectManager.Memory.ReadUInt(BaseAddress + (uint)0xA0C) + (uint)0x60), 24); 
+                return ObjectManager.Memory.ReadASCIIString(ObjectManager.Memory.ReadUInt(ObjectManager.Memory.ReadUInt(BaseAddress + (uint)0x968) + (uint)0x64), 24); 
             }
         }
 

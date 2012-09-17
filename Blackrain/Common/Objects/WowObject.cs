@@ -33,7 +33,7 @@
         /// </summary>
         public int Type
         {
-            get { return ObjectManager.Memory.ReadInt(BaseAddress + 0x14); }
+            get { return ObjectManager.Memory.ReadInt(BaseAddress + 0x10); }
         }
 
         /// <summary>

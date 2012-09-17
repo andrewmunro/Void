@@ -70,7 +70,7 @@ namespace BlackRain.Common
         /// </summary>
         public enum WowGameObject : uint
         {
-            Name1 = 0x1CC,
+            Name1 = 0x1B8,
             Name2 = 0xB4,
         }
 
@@ -199,7 +199,7 @@ namespace BlackRain.Common
            UNIT_FIELD_CHARMEDBY = 0x38,
            UNIT_FIELD_SUMMONEDBY = 0x40,
            UNIT_FIELD_CREATEDBY = 0x48,
-           UNIT_FIELD_TARGET = 0x50,
+           UNIT_FIELD_TARGET = 0x13,
            UNIT_FIELD_CHANNEL_OBJECT = 0x58,
            UNIT_CHANNEL_SPELL = 0x60,
            UNIT_FIELD_BYTES_0 = 0x64,
