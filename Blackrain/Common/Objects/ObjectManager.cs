@@ -18,13 +18,15 @@ namespace BlackRain.Common.Objects
         /// </summary>
         private static readonly object objPulse = new object();
 
-        private static Process WowProcess { get; set; }
+        public static Process WowProcess { get; set; }
 
         /// <summary>
         /// Gets the wow base address.
         /// </summary>
         /// <value>The wow base address.</value>
         /// 19/10/2010 17:30
+        /// 
+
         public static uint WowBaseAddress
         {
             get 
@@ -67,7 +69,7 @@ namespace BlackRain.Common.Objects
         /// <summary>
         /// The instance of BlackMagic used for World of Warcraft memory editing.
         /// </summary>
-        internal static BlackMagic Memory { get; set; }
+        public static BlackMagic Memory { get; set; }
 
         /// <summary>
         /// Is the ObjectManager initialized?

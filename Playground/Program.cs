@@ -33,37 +33,24 @@ namespace Playground
                         Console.WriteLine(ObjectManager.Me.Target.Name + " " + ObjectManager.Me.Target.Health + "/" + ObjectManager.Me.Target.MaximumHealth + " " + ObjectManager.Me.Target.Mana + "/" + ObjectManager.Me.Target.MaximumMana);
 
 
+
+                        //CTMHelper.ClickToMove(ObjectManager.Me.Target.X, ObjectManager.Me.Target.Y, ObjectManager.Me.Target.Z, CTMAction.InteractNpc, ObjectManager.Me.Target.GUID);
+
+
                         
-
-
-                        uint WoWBasePlusCTMBase = ObjectManager.Read<uint>(ObjectManager.WowBaseAddress + (uint)CTM.CTM_Base);
-
-                        float X = ObjectManager.Read<float>(WoWBasePlusCTMBase + (uint)CTM.CTM_X);
-                       // float Y = ObjectManager.Read<float>(WoWBasePlusCTMBase + (uint)CTM.CTM_Y);
-                        //float Z = ObjectManager.Read<float>(WoWBasePlusCTMBase + (uint)CTM.CTM_Z);
-
-                        //int currentAction = ObjectManager.Read<int>(CTMAddress + (uint)CTM.CTM_GUID);
-                        //Console.WriteLine("Current Action:" + X);
-                        /*
-                        BMagic.WriteInt(CTMAddress + Push, 4);
-
-                        ObjectManager.Write<float>(ObjectManager.WowBaseAddress + (uint)CTM.CTM_Base + (uint)CTM.CTM_X, ObjectManager.Me.Target.X);
-                        ObjectManager.Write<float>(ObjectManager.WowBaseAddress + (uint)CTM.CTM_Base + (uint)CTM.CTM_Y, ObjectManager.Me.Target.Y);
-                        ObjectManager.Write<float>(ObjectManager.WowBaseAddress + (uint)CTM.CTM_Base + (uint)CTM.CTM_Z, ObjectManager.Me.Target.Z);
-
-                        ObjectManager.Write<uint>(ObjectManager.WowBaseAddress + (uint)CTM.CTM_Base + (uint)CTM.CTM_ACTION, (uint)CTMAction.WalkTo);
-                       */
-                        /*
-                        ObjectManager.Write<float>((uint)CTM_Base + (uint)BlackRain.Common.Offsets.ClickToMove.CTM_Y, ObjectManager.Me.Target.Y);
-                        ObjectManager.Write<float>((uint)BlackRain.Common.Offsets.ClickToMove.CTM_Base + (uint)BlackRain.Common.Offsets.ClickToMove.CTM_Z, ObjectManager.Me.Target).;
-                        ObjectManager.Write<uint>((uint)BlackRain.Common.Offsets.ClickToMove.CTM_Base + (uint)BlackRain.Common.Offsets.ClickToMove.CTM_Action, (uint)BlackRain.Common.Offsets.CTMAction.WalkTo);
-                        */
-             
-
-
-                        //ObjectManager.Me.Target.FuckingDumpThatShit();
+                       
+                      
                     }
 
+                    Thread.Sleep(5000);
+                    foreach (WowGameObject gameObject in ObjectManager.GameObjects)
+                    {
+                        if (gameObject.Name.ToLower() == "mailbox")
+                        {
+                            CTMHelper.ClickToMove(gameObject.X, gameObject.Y, gameObject.Z, CTMAction.InteractObject, gameObject.GUID);
+                        }
+                    }
+                    Thread.Sleep(1000);
                     //Console.WriteLine("Target: " + ObjectManager.Me.Target.Name);
                     //Console.WriteLine("ToT: " + ObjectManager.Me.Target.Target.Name);
                     //Console.WriteLine("Health: " + ObjectManager.Me.Health + "/" + ObjectManager.Me.MaximumHealth);
@@ -88,36 +75,42 @@ namespace Playground
 
             Console.Read();
         }
-
-
-        public enum CTM : uint
+        /*
+        public static void LuaDoString(string command)
         {
-            CGPlayer_C__ClickToMove = 0x493760,     // 5.0.5 
-            CTM_Base = 0xC2BD04,                    // 5.0.5 
-            CTM_Push = 0x24,                        // 5.0.5 
-            CTM_X = 0x8C,                           // 5.0.5 
-            CTM_Y = CTM_X + 0x4,                    // 5.0.5 
-            CTM_Z = CTM_X + 0x8,                    // 5.0.5 
-            CTM_GUID = 0x1C,                        // 5.0.5 
-            CTM_Distance = 0xC                      // 5.0.5 
+            // Allocate memory
+            uint DoStringArg_Codecave = MyHook.Memory.AllocateMemory(Encoding.UTF8.GetBytes(command).Length + 1);
+            // offset:
+            FrameScript__Execute = 0x819210;
+
+
+            // Write value:
+            MyHook.Memory.WriteBytes(DoStringArg_Codecave, Encoding.UTF8.GetBytes(command));
+
+            // Write the asm stuff for Lua_DoString
+            String[] asm = new String[] 
+            {
+                "mov eax, " + DoStringArg_Codecave,
+                "push 0",
+                "push eax",
+                "push eax",
+                "mov eax, " + (uint)FrameScript__Execute, // Lua_DoString
+                "call eax",
+                "add esp, 0xC",
+                "retn",    
+            };
+
+            // Inject
+            MyHook.InjectAndExecute(asm);
+            // Free memory allocated 
+            MyHook.Memory.FreeMemory(DoStringArg_Codecave);
         }
 
-        public enum CTMAction
-        {
-            FaceTarget = 0x1,
-            Stop = 0x3,
-            WalkTo = 0x4,
-            InteractNpc = 0x5,
-            Loot = 0x6,
-            InteractObject = 0x7,
-            Unknown1 = 0x8,
-            Unknown2 = 0x9,
-            AttackPos = 0xA,
-            AttackGuid = 0xB,
-            WalkAndRotate = 0xC
-        };
+       
+    
 
-
+        
+*/
    
 
     }
