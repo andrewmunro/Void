@@ -6,11 +6,14 @@ using BlackRain.Common.Objects;
 using System.Diagnostics;
 using System.Threading;
 using BlackRain.Common;
+using Magic;
 
 namespace Playground
 {
     class Program
     {
+        static HookManager hookManager;
+
         static void Main(string[] args)
         {
             var proc = Process.GetProcessesByName("wow");
@@ -19,11 +22,14 @@ namespace Playground
             {
                 ObjectManager.Initialize(p);
                 ObjectManager.Pulse();
+
+                hookManager = new HookManager(ObjectManager.Memory);
+                
                 while (true)
                 {
                     Console.Clear();
                     // 16057
-                    
+                    /*
                    
                     Console.WriteLine("[LocalPlayer]");
                     Console.WriteLine("Name: " + ObjectManager.Me.Name);
@@ -47,10 +53,33 @@ namespace Playground
                     {
                         if (gameObject.Name.ToLower() == "mailbox")
                         {
-                            CTMHelper.ClickToMove(gameObject.X, gameObject.Y, gameObject.Z, CTMAction.InteractObject, gameObject.GUID);
+                            //CTMHelper.ClickToMove(gameObject.X, gameObject.Y, gameObject.Z, CTMAction.InteractObject, gameObject.GUID);
                         }
                     }
                     Thread.Sleep(1000);
+
+                    Console.WriteLine("Dancing");
+                    */
+                    ProcessThread wowMainThread = SThread.GetMainThread(p.Id);
+                    IntPtr hThread = SThread.OpenThread(wowMainThread.Id);
+
+                    //SThread.ResumeThread(hThread);
+
+                   // SThread.SuspendThread(hThread);
+
+                  //  try
+                   // {
+
+                        LuaDoString2("print('dance')");
+                   // }
+                   // catch (Exception e)
+                  //  {
+                  //      Console.WriteLine(e);
+                  //      Console.WriteLine("Fail: LuaDoString2");
+                  //  }
+
+                  //  SThread.ResumeThread(hThread);
+
                     //Console.WriteLine("Target: " + ObjectManager.Me.Target.Name);
                     //Console.WriteLine("ToT: " + ObjectManager.Me.Target.Target.Name);
                     //Console.WriteLine("Health: " + ObjectManager.Me.Health + "/" + ObjectManager.Me.MaximumHealth);
@@ -75,17 +104,19 @@ namespace Playground
 
             Console.Read();
         }
-        /*
+
+        
         public static void LuaDoString(string command)
         {
             // Allocate memory
-            uint DoStringArg_Codecave = MyHook.Memory.AllocateMemory(Encoding.UTF8.GetBytes(command).Length + 1);
+
+            uint DoStringArg_Codecave = ObjectManager.Memory.AllocateMemory(Encoding.ASCII.GetBytes(command).Length + 1);
             // offset:
-            FrameScript__Execute = 0x819210;
+            uint FrameScript__Execute = 0x75350;
 
 
             // Write value:
-            MyHook.Memory.WriteBytes(DoStringArg_Codecave, Encoding.UTF8.GetBytes(command));
+            ObjectManager.Memory.WriteBytes(DoStringArg_Codecave, Encoding.ASCII.GetBytes(command));
 
             // Write the asm stuff for Lua_DoString
             String[] asm = new String[] 
@@ -101,16 +132,49 @@ namespace Playground
             };
 
             // Inject
-            MyHook.InjectAndExecute(asm);
+            hookManager.InjectAndExecute(asm);
+            //ObjectManager.Memory.Asm.InjectAndExecute(DoStringArg_Codecave);
             // Free memory allocated 
-            MyHook.Memory.FreeMemory(DoStringArg_Codecave);
+            ObjectManager.Memory.FreeMemory(DoStringArg_Codecave);
         }
 
+
+        public static void LuaDoString2(string command)
+        {
+
+           
+
+            int nSize = command.Length + 0x100;
+            uint codeCave = ObjectManager.Memory.AllocateMemory(nSize);
+            uint moduleBase = (uint)ObjectManager.WowProcess.MainModule.BaseAddress;
+
+            ObjectManager.Memory.WriteASCIIString(codeCave, command);
+
+            ObjectManager.Memory.Asm.Clear();
+
+            String[] asm = new String[] 
+            {
+                "mov eax, " + codeCave,
+                "push 0",
+                "push eax",
+              
+                "push eax",
+                "mov eax, " + (moduleBase + 0x75350),
+                
+                "call eax",
+                "add esp, 0xC",
+                "retn",    
+            };
+
+            hookManager.InjectAndExecute(asm);
+            //vLib.InjectAndExecute(asm);
+            ObjectManager.Memory.FreeMemory(codeCave);
+        }
        
     
 
         
-*/
+
    
 
     }
