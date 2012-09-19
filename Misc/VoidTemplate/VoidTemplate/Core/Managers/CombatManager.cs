@@ -9,15 +9,15 @@ namespace VoidTemplate.Core.Managers
     {
         public static void DoCombat()
         {
-            while (InCombat)
-            {
+            //while (InCombat)
+            //{
 
 
 
-            }
+            //}
 
-            if (IsDead) currentState = Dead;
-            else currentState = Loot;
+            //if (IsDead) currentState = Dead;
+            //else currentState = Loot;
         }
     }
 }

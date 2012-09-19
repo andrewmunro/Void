@@ -17,3 +17,16 @@ I:\Void\Blackrain\bin\Debug\BlackMagic.dll
 I:\Void\Blackrain\bin\Debug\fasmdll_managed.dll
 I:\Void\Blackrain\obj\Debug\BlackRain.dll
 I:\Void\Blackrain\obj\Debug\BlackRain.pdb
+C:\Users\Andrew\Desktop\Void\Blackrain\bin\Debug\BlackRain.dll
+C:\Users\Andrew\Desktop\Void\Blackrain\bin\Debug\BlackRain.pdb
+C:\Users\Andrew\Desktop\Void\Blackrain\bin\Debug\BlackMagic.dll
+C:\Users\Andrew\Desktop\Void\Blackrain\bin\Debug\fasmdll_managed.dll
+C:\Users\Andrew\Desktop\Void\Blackrain\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Andrew\Desktop\Void\Blackrain\obj\Debug\BlackRain.GUI.Log.resources
+C:\Users\Andrew\Desktop\Void\Blackrain\obj\Debug\BlackRain.GUI.SelectProcess.resources
+C:\Users\Andrew\Desktop\Void\Blackrain\obj\Debug\GenerateResource.read.1.tlog
+C:\Users\Andrew\Desktop\Void\Blackrain\obj\Debug\ResGen.read.1.tlog
+C:\Users\Andrew\Desktop\Void\Blackrain\obj\Debug\GenerateResource.write.1.tlog
+C:\Users\Andrew\Desktop\Void\Blackrain\obj\Debug\ResGen.write.1.tlog
+C:\Users\Andrew\Desktop\Void\Blackrain\obj\Debug\BlackRain.dll
+C:\Users\Andrew\Desktop\Void\Blackrain\obj\Debug\BlackRain.pdb

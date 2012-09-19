@@ -12,7 +12,7 @@ namespace Playground
 {
     class Program
     {
-        static HookManager hookManager;
+        //static HookManager hookManager;
 
         static void Main(string[] args)
         {
@@ -23,7 +23,7 @@ namespace Playground
                 ObjectManager.Initialize(p);
                 ObjectManager.Pulse();
 
-                hookManager = new HookManager(ObjectManager.Memory);
+                //hookManager = new HookManager(ObjectManager.Memory);
                 
                 while (true)
                 {
@@ -132,7 +132,7 @@ namespace Playground
             };
 
             // Inject
-            hookManager.InjectAndExecute(asm);
+            //hookManager.InjectAndExecute(asm);
             //ObjectManager.Memory.Asm.InjectAndExecute(DoStringArg_Codecave);
             // Free memory allocated 
             ObjectManager.Memory.FreeMemory(DoStringArg_Codecave);
@@ -166,7 +166,7 @@ namespace Playground
                 "retn",    
             };
 
-            hookManager.InjectAndExecute(asm);
+            //hookManager.InjectAndExecute(asm);
             //vLib.InjectAndExecute(asm);
             ObjectManager.Memory.FreeMemory(codeCave);
         }

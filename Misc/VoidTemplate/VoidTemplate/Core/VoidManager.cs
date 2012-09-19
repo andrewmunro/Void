@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using VoidTemplate.Core.Managers;
+using System.Xml;
+using Microsoft.Xna.Framework;
 
 namespace VoidTemplate.Core
 {
@@ -23,9 +25,11 @@ namespace VoidTemplate.Core
 
         public VoidManager()
         {
-            Update();
+            ScriptManager.loadScript();
+            //Update();
         }
 
+/*
         public void Update()
         {
             switch (curState)
@@ -73,6 +77,6 @@ namespace VoidTemplate.Core
                     break;
             }
         }
-
+        */
     }
 }

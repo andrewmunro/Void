@@ -1,0 +1,9 @@
+C:\Users\Andrew\Desktop\Void\Playground\obj\x86\Release\ResolveAssemblyReference.cache
+C:\Users\Andrew\Desktop\Void\Playground\bin\Release\Playground.exe
+C:\Users\Andrew\Desktop\Void\Playground\bin\Release\Playground.pdb
+C:\Users\Andrew\Desktop\Void\Playground\bin\Release\BlackMagic.dll
+C:\Users\Andrew\Desktop\Void\Playground\bin\Release\BlackRain.dll
+C:\Users\Andrew\Desktop\Void\Playground\bin\Release\fasmdll_managed.dll
+C:\Users\Andrew\Desktop\Void\Playground\bin\Release\BlackRain.pdb
+C:\Users\Andrew\Desktop\Void\Playground\obj\x86\Release\Playground.exe
+C:\Users\Andrew\Desktop\Void\Playground\obj\x86\Release\Playground.pdb
