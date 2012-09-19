@@ -30,17 +30,17 @@ namespace VoidTemplate.Core.Managers
             return new Vector3(float.Parse(data[0]), float.Parse(data[1]), 0);
         }
 
-        public static void loadScript()
+        public static void loadScript(string file)
         {
             clearData();
 
             XmlDocument script = new XmlDocument();
 
-            script.Load(@"C:\Users\Andrew\Desktop\Profiles(1)\Profiles\1-30 Alliance\1-20\1-20 Human\1-10\01-10 Elwynn Forest.xml");
+            script.Load(file);
             XmlNodeList wayList = script.GetElementsByTagName("Waypoint");
             XmlNodeList ghostList = script.GetElementsByTagName("GhostWaypoint");
             XmlNode factionList = script.SelectSingleNode("Factions");
-            factions = int.Parse(factionList.InnerText.Split(' '));
+            //factions = int.Parse(factionList.InnerText.Split(' '));
             minLevel = int.Parse(script.SelectSingleNode("MinLevel").InnerXml);
             maxLevel = int.Parse(script.SelectSingleNode("MaxLevel").InnerXml);
             for (int i = 0; i < wayList.Count; i++)
