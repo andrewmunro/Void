@@ -44,9 +44,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\Managers\NavigationManager.cs" />
     <Compile Include="Core\Managers\ScriptManager.cs" />
     <Compile Include="Core\Managers\CombatManager.cs" />
-    <Compile Include="Core\Managers\NavigationManager.cs" />
     <Compile Include="VoidCore.cs" />
     <Compile Include="Core\VoidManager.cs" />
     <Compile Include="Program.cs" />

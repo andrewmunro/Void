@@ -39,10 +39,9 @@ namespace VoidTemplate.Core.Managers
             script.Load(file);
             XmlNodeList wayList = script.GetElementsByTagName("Waypoint");
             XmlNodeList ghostList = script.GetElementsByTagName("GhostWaypoint");
-            XmlNode factionList = script.SelectSingleNode("Factions");
-            //factions = int.Parse(factionList.InnerText.Split(' '));
-            minLevel = int.Parse(script.SelectSingleNode("MinLevel").InnerXml);
-            maxLevel = int.Parse(script.SelectSingleNode("MaxLevel").InnerXml);
+            string[] factionList = script.SelectSingleNode("//Factions").InnerText.Split(' ');
+            minLevel = int.Parse(script.SelectSingleNode("//MinLevel").InnerXml);
+            maxLevel = int.Parse(script.SelectSingleNode("//MaxLevel").InnerXml);
             for (int i = 0; i < wayList.Count; i++)
             {
                 waypoints.Add(xmltoVector3(wayList[i]));
@@ -51,15 +50,43 @@ namespace VoidTemplate.Core.Managers
             {
                 ghostWaypoints.Add(xmltoVector3(ghostList[i]));
             }
-            for (int i = 0; i < ghostList.Count; i++)
+            for (int i = 0; i < factionList.Length; i++)
             {
-                factions.Add(int.Parse(ghostList[i].InnerText));
+                factions.Add(int.Parse(factionList[i]));
             }
+            /*
+            Console.WriteLine(minLevel);
+            Console.WriteLine(maxLevel);
+            waypoints.ForEach(wp => Console.WriteLine(wp.ToString()));
+            ghostWaypoints.ForEach(gwp => Console.WriteLine(gwp.ToString()));
+            factions.ForEach(f => Console.WriteLine(f.ToString()));
+            Console.Read();
+            */
         }
 
-        public static List<Vector3> Waypoints()
+        public static int MinLevel
         {
-            return waypoints;
+            get { return minLevel; }
+        }
+
+        public static int MaxLevel
+        {
+            get { return maxLevel; }
+        }
+
+        public static List<Vector3> Waypoints
+        {
+            get { return waypoints; }
+        }
+
+        public static List<Vector3> GhostWaypoints
+        {
+            get { return ghostWaypoints; }
+        }
+
+        public static List<int> Factions
+        {
+            get { return factions; }
         }
     }
 }
