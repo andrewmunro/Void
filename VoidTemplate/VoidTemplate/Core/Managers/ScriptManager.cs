@@ -11,6 +11,8 @@ namespace VoidTemplate.Core.Managers
     {
         static List<Vector3> waypoints = new List<Vector3>();
         static List<Vector3> ghostWaypoints = new List<Vector3>();
+        static List<Vector3> vendorWaypoints = new List<Vector3>();
+        static List<Vector3> repairWaypoints = new List<Vector3>();
         static List<int> factions = new List<int>();
         static int minLevel = 0;
         static int maxLevel = 90;
@@ -22,6 +24,8 @@ namespace VoidTemplate.Core.Managers
             waypoints.Clear();
             ghostWaypoints.Clear();
             factions.Clear();
+            vendorWaypoints.Clear();
+            repairWaypoints.Clear();
         }
 
         private static Vector3 xmltoVector3(XmlNode node)
@@ -39,9 +43,12 @@ namespace VoidTemplate.Core.Managers
             script.Load(file);
             XmlNodeList wayList = script.GetElementsByTagName("Waypoint");
             XmlNodeList ghostList = script.GetElementsByTagName("GhostWaypoint");
+            XmlNodeList vendorList = script.GetElementsByTagName("VendorWaypoint");
+            XmlNodeList repairList = script.GetElementsByTagName("RepairWaypoint");
             string[] factionList = script.SelectSingleNode("//Factions").InnerText.Split(' ');
             minLevel = int.Parse(script.SelectSingleNode("//MinLevel").InnerXml);
             maxLevel = int.Parse(script.SelectSingleNode("//MaxLevel").InnerXml);
+
             for (int i = 0; i < wayList.Count; i++)
             {
                 waypoints.Add(xmltoVector3(wayList[i]));
@@ -49,6 +56,14 @@ namespace VoidTemplate.Core.Managers
             for (int i = 0; i < ghostList.Count; i++)
             {
                 ghostWaypoints.Add(xmltoVector3(ghostList[i]));
+            }
+            for (int i = 0; i < vendorList.Count; i++)
+            {
+                vendorWaypoints.Add(xmltoVector3(vendorList[i]));
+            }
+            for (int i = 0; i < repairList.Count; i++)
+            {
+                repairWaypoints.Add(xmltoVector3(repairList[i]));
             }
             for (int i = 0; i < factionList.Length; i++)
             {
@@ -82,6 +97,16 @@ namespace VoidTemplate.Core.Managers
         public static List<Vector3> GhostWaypoints
         {
             get { return ghostWaypoints; }
+        }
+
+        public static List<Vector3> VendorWaypoints
+        {
+            get { return vendorWaypoints; }
+        }
+
+        public static List<Vector3> RepairWaypoints
+        {
+            get { return repairWaypoints; }
         }
 
         public static List<int> Factions
