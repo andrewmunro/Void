@@ -2,20 +2,19 @@
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{EC78A2DD-13BD-4583-8894-B1FF74C869F5}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{ECB797DC-902E-404A-B9BB-5356BC6AFFC4}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Playground</RootNamespace>
-    <AssemblyName>Playground</AssemblyName>
+    <RootNamespace>BlackRain</RootNamespace>
+    <AssemblyName>BlackRain</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-    <PlatformTarget>x86</PlatformTarget>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,9 +22,10 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <PlatformTarget>x86</PlatformTarget>
+    <DocumentationFile>bin\Debug\BlackRain.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -34,32 +34,42 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BlackMagic, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="BlackMagic">
       <HintPath>..\libs\BlackMagic.dll</HintPath>
     </Reference>
-    <Reference Include="fasmdll_managed, Version=1.0.4606.5181, Culture=neutral, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="fasmdll_managed">
       <HintPath>..\libs\fasmdll_managed.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="Common\Logging.cs" />
+    <Compile Include="Common\Objects\ObjectManager.cs" />
+    <Compile Include="Common\Objects\WowContainer.cs" />
+    <Compile Include="Common\Objects\WowCorpse.cs" />
+    <Compile Include="Common\Objects\WowDynamicObject.cs" />
+    <Compile Include="Common\Objects\WowGameObject.cs" />
+    <Compile Include="Common\Objects\WowItem.cs" />
+    <Compile Include="Common\Objects\WowObject.cs" />
+    <Compile Include="Common\Objects\WowPlayer.cs" />
+    <Compile Include="Common\Objects\WowPlayerMe.cs" />
+    <Compile Include="Common\Objects\WowUnit.cs" />
+    <Compile Include="Common\Offsets.cs" />
+    <Compile Include="Common\Point.cs" />
+    <Compile Include="Common\Utilities.cs" />
+    <Compile Include="Helpers\CTMHelper.cs" />
+    <Compile Include="Helpers\LUAHelper.cs" />
+    <Compile Include="Injection\Hook.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\VoidLib\VoidLib.csproj">
-      <Project>{ECB797DC-902E-404A-B9BB-5356BC6AFFC4}</Project>
-      <Name>VoidLib</Name>
-    </ProjectReference>
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

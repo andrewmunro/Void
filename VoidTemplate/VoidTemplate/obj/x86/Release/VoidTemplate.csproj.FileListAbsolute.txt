@@ -1,5 +1,0 @@
-C:\Users\Andrew\Desktop\Void\Misc\VoidTemplate\VoidTemplate\obj\x86\Release\ResolveAssemblyReference.cache
-C:\Users\Andrew\Desktop\Void\Misc\VoidTemplate\VoidTemplate\bin\Release\VoidTemplate.exe
-C:\Users\Andrew\Desktop\Void\Misc\VoidTemplate\VoidTemplate\bin\Release\VoidTemplate.pdb
-C:\Users\Andrew\Desktop\Void\Misc\VoidTemplate\VoidTemplate\obj\x86\Release\VoidTemplate.exe
-C:\Users\Andrew\Desktop\Void\Misc\VoidTemplate\VoidTemplate\obj\x86\Release\VoidTemplate.pdb
