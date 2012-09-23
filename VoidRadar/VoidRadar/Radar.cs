@@ -75,6 +75,8 @@ namespace VoidRadar
             base.Initialize();
         }
 
+        Texture2D currentTile;
+        Texture2D lineTexture;
         /// <summary>
         /// LoadContent will be called once per game and is the place to load
         /// all of your content.
@@ -91,30 +93,23 @@ namespace VoidRadar
                 ObjectManager.Pulse();
             }
 
-            // TODO: use this.Content to load your game content here
+            int blockX = (int)Math.Floor((32 - (ObjectManager.Me.X / 533.33333f)));
+            int blockY = (int)Math.Floor((32 - (ObjectManager.Me.Y / 533.33333f)));
+
+            currentTile = Content.Load<Texture2D>("Tiles/map" + blockY + "_" + blockX);
+            lineTexture = Content.Load<Texture2D>("linetexture");
         }
 
-        /// <summary>
-        /// UnloadContent will be called once per game and is the place to unload
-        /// all content.
-        /// </summary>
         protected override void UnloadContent()
         {
-            // TODO: Unload any non ContentManager content here
+
         }
 
-        /// <summary>
-        /// Allows the game to run logic such as updating the world,
-        /// checking for collisions, gathering input, and playing audio.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            // Allows the game to exit
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
-                this.Exit();
-
             Camera.Update(gameTime);
+
+
 
             UpdateEntities(gameTime);
             // TODO: Add your update logic here
@@ -136,10 +131,30 @@ namespace VoidRadar
             }
         }
 
+        public void DrawLine(Texture2D texture, Vector2 start, Vector2 end)
+        {
+            spriteBatch.Begin();
+            spriteBatch.Draw(texture, start, null, Color.Red,
+                             (float)Math.Atan2(end.Y - start.Y, end.X - start.X),
+                             new Vector2(0f, (float)texture.Height / 2),
+                             new Vector2(Vector2.Distance(start, end), 1f),
+                             SpriteEffects.None, 0f);
+            spriteBatch.End();
+        }
 
         public void DrawUnit(WowUnit unit)
         {
-            DrawPoint(Icons.Mob, "(" + unit.Level + ") " + unit.Name + "\n      [" + unit.Health + "/" + unit.MaximumHealth + "]", new Vector2(unit.X, unit.Y));
+            DrawPoint(Icons.Mob, "(" + unit.Level + ") " + unit.Name + "\n[" + unit.HealthPercentage + "%]", new Vector2(unit.X, unit.Y));
+        }
+
+        public Vector2 wowToScreen(Vector2 position)
+        {
+            Vector2 centerOffset = new Vector2(ObjectManager.Me.X, ObjectManager.Me.Y);
+
+            position = Camera.WorldToScreen(position - centerOffset);
+            position.X = -position.X + windowWidth;
+
+            return position;
         }
 
         public void DrawPoint(Icons icon, String text, Vector2 position)
@@ -151,14 +166,16 @@ namespace VoidRadar
             Vector2 textSize = basicFont.MeasureString(text);
 
             position = new Vector2((int)position.X, (int)position.Y);
-
+            
             spriteBatch.Draw(iconLibrary[icon], position, Color.White);
+            
             spriteBatch.DrawString(basicFont, text, position + new Vector2(-(int)(textSize.X / 2), 09), Color.Black);
             spriteBatch.DrawString(basicFont, text, position + new Vector2(-(int)(textSize.X / 2) - 1, 10), Color.Black);
             spriteBatch.DrawString(basicFont, text, position + new Vector2(-(int)(textSize.X / 2), 11), Color.Black);
             spriteBatch.DrawString(basicFont, text, position + new Vector2(-(int)(textSize.X / 2) + 1, 10), Color.Black);
 
             spriteBatch.DrawString(basicFont, text, position + new Vector2(-(int)(textSize.X / 2), 10), Color.White);
+             
         }
 
 
@@ -168,12 +185,26 @@ namespace VoidRadar
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
+            int blockX = (int)Math.Floor((32 - (ObjectManager.Me.X / 533.33333f)));
+            int blockY = (int)Math.Floor((32 - (ObjectManager.Me.Y / 533.33333f)));
+            float smallX = (blockX - ((32 - (ObjectManager.Me.X / 533.33333f))));
+            float smallY = (blockY - ((32 - (ObjectManager.Me.Y / 533.33333f))));
+
             GraphicsDevice.Clear(Color.CornflowerBlue);
             // TODO: Add your drawing code here
+            
+            spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied, SamplerState.AnisotropicClamp, DepthStencilState.Default, RasterizerState.CullNone, null, Camera.NormalMatrix);
+            spriteBatch.Draw(currentTile, -new Vector2(256 * Math.Abs(smallY), 256 * Math.Abs(smallX)) , Color.White);
+            spriteBatch.End();
+
+
             spriteBatch.Begin();
             ObjectManager.Units.ForEach(unit => DrawUnit(unit));
             DrawPoint(Icons.Me, "(" + ObjectManager.Me.Level + ") " + "Me" + "\n[" + ObjectManager.Me.Health + "/" + ObjectManager.Me.MaximumHealth + "]", new Vector2(ObjectManager.Me.X, ObjectManager.Me.Y));
             spriteBatch.End();
+
+
+            DrawLine(lineTexture, Vector2.Zero, new Vector2(100, 100));
 
             base.Draw(gameTime);
         }
