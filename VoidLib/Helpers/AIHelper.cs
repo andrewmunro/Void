@@ -28,5 +28,15 @@ namespace BlackRain.Helpers
         {
              return ObjectManager.Units.FindAll(unit => unit.IsUnit && unit.HasUnitFlag(Offsets.UnitFlags.Combat) && (unit.TargetGUID == ObjectManager.Me.GUID || (ObjectManager.Me.HasPet && unit.Target == ObjectManager.Me.Pet)));
         }
+
+        public static bool isHostile(WowUnit unit)
+        {
+            return (uint)unit.Reaction >= (uint)ReactionType.Neutral;
+        }
+
+        public static bool isFriendly(WowUnit unit)
+        {
+            return unit.Reaction >= ReactionType.Friendly;
+        }
     }
 }
