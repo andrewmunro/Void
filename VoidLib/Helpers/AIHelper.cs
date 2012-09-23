@@ -38,5 +38,10 @@ namespace BlackRain.Helpers
         {
             return unit.Reaction >= ReactionType.Friendly;
         }
+
+        public static uint getContinent()
+        {
+            return uint.Parse(LUAHelper.GetLUA("GetCurrentMapContinent();"));
+        }
     }
 }
