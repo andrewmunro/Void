@@ -10,7 +10,7 @@ namespace BlackRain.Helpers
     {
         private string url = "50.115.175.42";
 
-        private SqlConnection connect() 
+        public SqlConnection connect() 
         {
             SqlConnection con = new SqlConnection("user id=void;" +
                                        "password=l3tm31n;server=" + url +";" +
@@ -31,14 +31,14 @@ namespace BlackRain.Helpers
             }
         }
 
-        private SqlDataReader getInfo(String command, SqlConnection con)
+        public SqlDataReader getInfo(String command, SqlConnection con)
         {
             SqlCommand cmd = new SqlCommand(command, con);
             SqlDataReader reader = cmd.ExecuteReader();
             return reader;
         }
 
-        private void setInfo(String command, SqlConnection con)
+        public void setInfo(String command, SqlConnection con)
         {
             SqlCommand cmd = new SqlCommand(command, con);
             try
@@ -51,7 +51,7 @@ namespace BlackRain.Helpers
             }
         }
 
-        private void disconnect(SqlConnection con)
+        public void disconnect(SqlConnection con)
         {
             con.Close();
         }
