@@ -38,7 +38,7 @@ namespace BlackRain.Common.Objects
         }
 
 
-        internal bool HasUnitFlag(Offsets.UnitFlags flag)
+        public bool HasUnitFlag(Offsets.UnitFlags flag)
         {
             return UnitFlags[(int)flag];
         }
@@ -107,6 +107,12 @@ namespace BlackRain.Common.Objects
             }
         }
 
+
+        public int Faction
+        {
+            get { return GetStorageField<int>((uint)Offsets.WowUnitFields.UNIT_FIELD_FACTIONTEMPLATE); }
+        }
+
         /// <summary>
         /// The unit's maximum health.
         /// </summary>
@@ -120,7 +126,7 @@ namespace BlackRain.Common.Objects
         /// </summary>
         public int HealthPercentage
         {
-            get { return ((100 * Health) / (MaximumHealth + 1)); }
+            get { return ((100 * Health) / (MaximumHealth)); }
         }
 
         /// <summary>
