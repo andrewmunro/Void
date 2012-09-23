@@ -64,9 +64,14 @@ namespace BlackRain.Common.Objects
             get { return HasUnitFlag(Offsets.UnitFlags.Combat); }
         }
 
-        public bool Sitting
+        public bool HasPet
         {
-            get { return HasUnitFlag(Offsets.UnitFlags.Sitting); }
+            get { return ObjectManager.Units.FindAll(unit => unit.SummonedBy == ObjectManager.Me.GUID).Count > 0; }
+        }
+
+        public WowUnit Pet
+        {
+            get { return ObjectManager.Units.Find(unit => unit.SummonedBy == ObjectManager.Me.GUID); }
         }
 
         /// <summary>
