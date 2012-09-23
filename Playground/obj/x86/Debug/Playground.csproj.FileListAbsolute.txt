@@ -1,0 +1,10 @@
+D:\Void\Playground\bin\Debug\Playground.exe
+D:\Void\Playground\bin\Debug\Playground.pdb
+D:\Void\Playground\bin\Debug\BlackRain.dll
+D:\Void\Playground\bin\Debug\BlackMagic.dll
+D:\Void\Playground\bin\Debug\fasmdll_managed.dll
+D:\Void\Playground\bin\Debug\BlackRain.pdb
+D:\Void\Playground\bin\Debug\BlackRain.xml
+D:\Void\Playground\obj\x86\Debug\ResolveAssemblyReference.cache
+D:\Void\Playground\obj\x86\Debug\Playground.exe
+D:\Void\Playground\obj\x86\Debug\Playground.pdb
