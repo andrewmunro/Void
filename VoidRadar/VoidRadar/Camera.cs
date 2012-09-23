@@ -20,9 +20,9 @@ namespace VoidRadar
         {
             // [Basic Movement]
             if (Keyboard.GetState().IsKeyDown(Keys.Down)) Position.Y -= 1;
-            if (Keyboard.GetState().IsKeyDown(Keys.Right)) Position.X -= 1;
+            if (Keyboard.GetState().IsKeyDown(Keys.Right)) Position.X += 1;
             if (Keyboard.GetState().IsKeyDown(Keys.Up)) Position.Y += 1;
-            if (Keyboard.GetState().IsKeyDown(Keys.Left)) Position.X += 1;
+            if (Keyboard.GetState().IsKeyDown(Keys.Left)) Position.X -= 1;
 
             if (Keyboard.GetState().IsKeyDown(Keys.OemPlus) || Keyboard.GetState().IsKeyDown(Keys.PageUp)) SetZoom(Zoom + 0.05f);
             if (Keyboard.GetState().IsKeyDown(Keys.OemMinus) || Keyboard.GetState().IsKeyDown(Keys.PageDown)) SetZoom(Zoom - 0.05f);

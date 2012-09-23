@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using VoidTemplate.Core.Managers;
+using VoidBot.Core.Managers;
 
-namespace VoidTemplate
+namespace VoidBot
 {
     class Program
     {

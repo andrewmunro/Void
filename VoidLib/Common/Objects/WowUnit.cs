@@ -76,6 +76,9 @@ namespace BlackRain.Common.Objects
         /// </summary>
         public bool IsPlayer { get { return Type == 4; } }
 
+        public bool isHostile { get { return Reaction >= ReactionType.Neutral; } }
+
+        public bool isFriendly { get { return Reaction >= ReactionType.Friendly; } }
 
         /// <summary>
         /// The GUID of the object this unit is charmed by.
@@ -311,10 +314,19 @@ namespace BlackRain.Common.Objects
         /// </summary>
         public virtual string Name
         {
-            get {
-                return ObjectManager.Memory.ReadASCIIString(ObjectManager.Memory.ReadUInt(ObjectManager.Memory.ReadUInt(BaseAddress + (uint)0x968) + (uint)0x64), 24); 
+            get
+            {
+                try
+                {
+                    return ObjectManager.Memory.ReadASCIIString(ObjectManager.Memory.ReadUInt(ObjectManager.Memory.ReadUInt(BaseAddress + (uint)0x968) + (uint)0x64), 24); 
+                }
+                catch
+                {
+                    return "Unknown";
+                }
             }
         }
+        
 
         /// <summary>
         /// The unit's DisplayID.

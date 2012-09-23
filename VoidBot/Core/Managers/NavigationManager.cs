@@ -4,15 +4,25 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 
-namespace VoidTemplate.Core.Managers
+namespace VoidBot.Core.Managers
 {
-    class NavigationManager
+    public enum CurrentPath
+    {
+        WayPoints,
+        GhostWaypoints,
+        VendorWaypoints,
+        RepairWaypoints
+    }
+
+    public class NavigationManager
     {
         Vector3 nextWaypoint = new Vector3();
 
+        public static CurrentPath currentPath = CurrentPath.WayPoints;
+
         public static void DoNavigation()
         {
-
+          
         }
     }
 }
