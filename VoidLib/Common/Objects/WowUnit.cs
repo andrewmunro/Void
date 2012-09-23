@@ -76,6 +76,9 @@ namespace BlackRain.Common.Objects
         /// </summary>
         public bool IsPlayer { get { return Type == 4; } }
 
+        public bool isHostile { get { return Reaction >= ReactionType.Neutral; } }
+
+        public bool isFriendly { get { return Reaction >= ReactionType.Friendly; } }
 
         /// <summary>
         /// The GUID of the object this unit is charmed by.

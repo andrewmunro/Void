@@ -34,7 +34,8 @@ namespace VoidRadar
             Player,
             Me,
             Mob,
-            NPC
+            NPC,
+            Critter
         }
 
         private void AddIcon(Icons iconEnum, String iconURL)
@@ -50,6 +51,7 @@ namespace VoidRadar
             AddIcon(Icons.Player, "Icons//Blue_Small");
             AddIcon(Icons.Mob, "Icons//Red_Small");
             AddIcon(Icons.NPC, "Icons//Yellow_Small");
+            AddIcon(Icons.Critter, "Icons//Yellow_Square");
         }
 
         public Radar()
@@ -139,7 +141,24 @@ namespace VoidRadar
 
         public void DrawUnit(WowUnit unit)
         {
-            DrawPoint(Icons.Mob, "(" + unit.Level + ") " + unit.Name + "\n      [" + unit.Health + "/" + unit.MaximumHealth + "]", new Vector2(unit.X, unit.Y));
+            if (unit.IsPlayer)
+            {
+                if (unit.isFriendly) { DrawPoint(Icons.Player, "(" + unit.Level + ") " + unit.Name + "\n      [" + unit.Health + "/" + unit.MaximumHealth + "]", new Vector2(unit.X, unit.Y)); }
+                else { DrawPoint(Icons.Mob, "(" + unit.Level + ") " + unit.Name + "\n      [" + unit.Health + "/" + unit.MaximumHealth + "]", new Vector2(unit.X, unit.Y)); }
+            }
+            if (unit.isFriendly)
+            {
+                DrawPoint(Icons.NPC, "(" + unit.Level + ") " + unit.Name + "\n      [" + unit.Health + "/" + unit.MaximumHealth + "]", new Vector2(unit.X, unit.Y));
+            }
+            if (unit.isHostile)
+            {
+                DrawPoint(Icons.Mob, "(" + unit.Level + ") " + unit.Name + "\n      [" + unit.Health + "/" + unit.MaximumHealth + "]", new Vector2(unit.X, unit.Y));
+            }
+            if (unit.Critter)
+            {
+                DrawPoint(Icons.Critter, "(" + unit.Level + ") " + unit.Name + "\n      [" + unit.Health + "/" + unit.MaximumHealth + "]", new Vector2(unit.X, unit.Y));
+            }
+
         }
 
         public void DrawPoint(Icons icon, String text, Vector2 position)
