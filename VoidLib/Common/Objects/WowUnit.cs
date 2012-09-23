@@ -1,11 +1,26 @@
 ﻿using System.Collections.Specialized;
 using System;
+using BlackRain.Helpers;
 
 namespace BlackRain.Common.Objects
 {
     /// <summary>
     /// An unit, such as an NPC, but also a player.
     /// </summary>
+    
+    public enum ReactionType : uint
+        {
+            Unknown = 0,
+            Exceptionally_Hostile = 1,
+            Very_Hostile = 2,
+            Hostile = 3,
+            Neutral = 4,
+            Friendly = 5,
+            Very_Friendly = 6,
+            Exceptionally_friendly = 7,
+            Exalted = 8,
+        }
+
     public class WowUnit : WowObject
     {
         /// <summary>
@@ -70,6 +85,7 @@ namespace BlackRain.Common.Objects
             get { return GetStorageField<ulong>((uint)Offsets.WowUnitFields.UNIT_FIELD_CHARMEDBY); }
         }
 
+
         /// <summary>
         /// The GUID of the object this unit is summoned by.
         /// </summary>
@@ -108,9 +124,33 @@ namespace BlackRain.Common.Objects
         }
 
 
-        public int Faction
+        private ReactionType cacheReaction = ReactionType.Unknown;
+
+        public ReactionType Reaction
         {
-            get { return GetStorageField<int>((uint)Offsets.WowUnitFields.UNIT_FIELD_FACTIONTEMPLATE); }
+            get
+            {
+                if (cacheReaction == ReactionType.Unknown)
+                {
+                    ulong currentTarget = ObjectManager.Me.TargetGUID;
+
+                    AIHelper.targetGUID(GUID);
+                    uint _Reaction = uint.Parse(LUAHelper.GetLUA("UnitReaction(\"player\", \"target\")"));
+                    AIHelper.targetGUID(currentTarget);
+
+                    Console.WriteLine("Loaded new reaction");
+                    cacheReaction = (ReactionType)_Reaction;
+
+                    return (ReactionType)_Reaction;
+                }
+                else
+                {
+                    return cacheReaction;
+                }
+
+                
+            
+            }
         }
 
         /// <summary>

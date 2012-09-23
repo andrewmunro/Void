@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using BlackRain.Common.Objects;
+using BlackRain.Common;
 
 namespace BlackRain.Helpers
 {
@@ -21,6 +22,11 @@ namespace BlackRain.Helpers
         public static void targetGUID(WowUnit unit)
         {
             ObjectManager.Memory.WriteUInt64((uint)ObjectManager.Memory.MainModule.BaseAddress + 0xC6BC08, unit.GUID);
+        }
+
+        public static List<WowUnit> getMobsWithBeef()
+        {
+             return ObjectManager.Units.FindAll(unit => unit.IsUnit && unit.HasUnitFlag(Offsets.UnitFlags.Combat) && (unit.TargetGUID == ObjectManager.Me.GUID || (ObjectManager.Me.HasPet && unit.Target == ObjectManager.Me.Pet)));
         }
     }
 }
