@@ -5,9 +5,9 @@ using System.Text;
 using System.Xml;
 using Microsoft.Xna.Framework;
 
-namespace VoidTemplate.Core.Managers
+namespace BlackRain.Helpers
 {
-    class ScriptManager
+    public class ScriptHelper
     {
         static List<Vector3> waypoints = new List<Vector3>();
         static List<Vector3> ghostWaypoints = new List<Vector3>();

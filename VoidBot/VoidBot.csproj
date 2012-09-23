@@ -8,7 +8,7 @@
     <ProjectGuid>{487E601F-6275-4DAF-9D13-6A9BD8E2EE3B}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>VoidTemplate</RootNamespace>
+    <RootNamespace>VoidBot</RootNamespace>
     <AssemblyName>VoidTemplate</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\Managers\HarvestManager.cs" />
     <Compile Include="Core\Managers\NavigationManager.cs" />
     <Compile Include="Core\Managers\ScriptManager.cs" />
     <Compile Include="Core\Managers\CombatManager.cs" />
@@ -54,6 +55,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\01-10 Elwynn Forest.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\VoidLib\VoidLib.csproj">
+      <Project>{ECB797DC-902E-404A-B9BB-5356BC6AFFC4}</Project>
+      <Name>VoidLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

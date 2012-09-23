@@ -66,6 +66,7 @@
     <Compile Include="Common\Point.cs" />
     <Compile Include="Common\Utilities.cs" />
     <Compile Include="Helpers\AIHelper.cs" />
+    <Compile Include="Helpers\ScriptHelper.cs" />
     <Compile Include="Helpers\SQLHelper.cs" />
     <Compile Include="Helpers\CTMHelper.cs" />
     <Compile Include="Helpers\LUAHelper.cs" />

@@ -84,6 +84,10 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\VoidBot\VoidBot.csproj">
+      <Project>{487E601F-6275-4DAF-9D13-6A9BD8E2EE3B}</Project>
+      <Name>VoidBot</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\VoidLib\VoidLib.csproj">
       <Project>{ECB797DC-902E-404A-B9BB-5356BC6AFFC4}</Project>
       <Name>VoidLib</Name>
