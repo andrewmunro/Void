@@ -5,6 +5,8 @@ using System.Text;
 using BlackRain.Injection;
 using BlackRain.Common.Objects;
 using System.Threading;
+using Magic;
+using System.Diagnostics;
 
 namespace BlackRain.Helpers
 {
@@ -12,10 +14,40 @@ namespace BlackRain.Helpers
     {
         static Hook MyHook;
 
+        public static void SuspendMainWowThread()
+        {
+            ProcessThread wowMainThread = SThread.GetMainThread((int)MyHook._processId);
+            IntPtr hThread = SThread.OpenThread(wowMainThread.Id);
+            SThread.SuspendThread(hThread);
+        }
+
+        public static void ResumeMainWowThread()
+        {
+            ProcessThread wowMainThread = SThread.GetMainThread((int)MyHook._processId);
+            IntPtr hThread = SThread.OpenThread(wowMainThread.Id);
+            SThread.ResumeThread(hThread);
+        }
+
+        public static string GetLUA(string Command)
+        {
+            DoString("tmp = " + Command);
+            string result = GetLocalizedText("tmp");
+
+            if (result != "")
+            {
+                return result;
+            }
+            else
+            {
+                return null;
+            }
+
+        }
+
         public static void DoString(string command)
         {
             if (MyHook == null) MyHook = new Hook((uint)ObjectManager.WowProcess.Id, (uint)ObjectManager.WowProcess.MainModule.BaseAddress);
-            //ProcessManager.SuspendMainWowThread();
+            SuspendMainWowThread();
 
             uint codecave = MyHook.Memory.AllocateMemory();
             uint stringcave = MyHook.Memory.AllocateMemory(command.Length + 1);
@@ -43,12 +75,13 @@ namespace BlackRain.Helpers
             }
             catch (Exception e)
             {
-                //ProcessManager.ResumeMainWowThread();
-                Console.WriteLine("[DoString] Error!");
+                
+                //Console.WriteLine("[DoString] Error!");
                 throw e;
             }
             finally
             {
+                ResumeMainWowThread();
                 MyHook.Memory.FreeMemory(codecave);
                 MyHook.Memory.FreeMemory(stringcave);
             }
@@ -56,7 +89,9 @@ namespace BlackRain.Helpers
 
         public static String GetLocalizedText(string variable)
         {
-            uint codecave = MyHook.Memory.AllocateMemory(variable.Length + 1);
+            SuspendMainWowThread();
+
+            uint codecave = MyHook.Memory.AllocateMemory(0x200 + 1);
             MyHook.Memory.WriteASCIIString(codecave + 0x100, variable);
 
             MyHook.Memory.Asm.Clear();
@@ -76,9 +111,11 @@ namespace BlackRain.Helpers
             
             MyHook.Memory.FreeMemory(codecave);
 
+            ResumeMainWowThread();
+
             return sResult;
         }
 
-     
+
     }
 }

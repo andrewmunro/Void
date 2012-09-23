@@ -64,6 +64,11 @@ namespace BlackRain.Common.Objects
             get { return HasUnitFlag(Offsets.UnitFlags.Combat); }
         }
 
+        public bool Sitting
+        {
+            get { return HasUnitFlag(Offsets.UnitFlags.Sitting); }
+        }
+
         /// <summary>
         /// The name of the player.
         /// </summary>
