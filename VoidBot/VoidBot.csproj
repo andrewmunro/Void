@@ -46,7 +46,6 @@
   <ItemGroup>
     <Compile Include="Core\Managers\HarvestManager.cs" />
     <Compile Include="Core\Managers\NavigationManager.cs" />
-    <Compile Include="Core\Managers\ScriptManager.cs" />
     <Compile Include="Core\Managers\CombatManager.cs" />
     <Compile Include="VoidCore.cs" />
     <Compile Include="Core\VoidManager.cs" />
