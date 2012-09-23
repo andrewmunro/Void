@@ -25,7 +25,6 @@ namespace VoidBot.Core
 
         public VoidManager()
         {
-            ScriptManager.loadScript("../../Assets/01-10 Elwynn Forest.xml");
             //Update();
         }
 

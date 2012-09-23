@@ -39,9 +39,18 @@ namespace BlackRain.Helpers
             return unit.Reaction >= ReactionType.Friendly;
         }
 
-        public static uint getContinent()
+        public static Continent getContinent()
         {
-            return uint.Parse(LUAHelper.GetLUA("GetCurrentMapContinent();"));
+            return (Continent)uint.Parse(LUAHelper.GetLUA("GetCurrentMapContinent();"));
+        }
+
+        public enum Continent : uint
+        {
+            Kalimdor = 1,
+            EasternKingdoms = 2,
+            Outland = 3,
+            Northrend = 4,
+            Maelstrom = 5,
         }
     }
 }
