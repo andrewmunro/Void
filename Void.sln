@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Playground", "Playground\Pl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VoidBot", "VoidBot\VoidBot.csproj", "{487E601F-6275-4DAF-9D13-6A9BD8E2EE3B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Map", "WindowsFormsApplication1\Map.csproj", "{74B66771-43FF-4CCB-829E-7DDD44B7FAB3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,16 @@ Global
 		{487E601F-6275-4DAF-9D13-6A9BD8E2EE3B}.Release|Mixed Platforms.Build.0 = Release|x86
 		{487E601F-6275-4DAF-9D13-6A9BD8E2EE3B}.Release|x86.ActiveCfg = Release|x86
 		{487E601F-6275-4DAF-9D13-6A9BD8E2EE3B}.Release|x86.Build.0 = Release|x86
+		{74B66771-43FF-4CCB-829E-7DDD44B7FAB3}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{74B66771-43FF-4CCB-829E-7DDD44B7FAB3}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{74B66771-43FF-4CCB-829E-7DDD44B7FAB3}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{74B66771-43FF-4CCB-829E-7DDD44B7FAB3}.Debug|x86.ActiveCfg = Debug|x86
+		{74B66771-43FF-4CCB-829E-7DDD44B7FAB3}.Debug|x86.Build.0 = Debug|x86
+		{74B66771-43FF-4CCB-829E-7DDD44B7FAB3}.Release|Any CPU.ActiveCfg = Release|x86
+		{74B66771-43FF-4CCB-829E-7DDD44B7FAB3}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{74B66771-43FF-4CCB-829E-7DDD44B7FAB3}.Release|Mixed Platforms.Build.0 = Release|x86
+		{74B66771-43FF-4CCB-829E-7DDD44B7FAB3}.Release|x86.ActiveCfg = Release|x86
+		{74B66771-43FF-4CCB-829E-7DDD44B7FAB3}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
