@@ -88,7 +88,7 @@
       <Project>{ECB797DC-902E-404A-B9BB-5356BC6AFFC4}</Project>
       <Name>VoidLib</Name>
     </ProjectReference>
-    <ProjectReference Include="..\WindowsGame2Content\RadarContent.contentproj">
+    <ProjectReference Include="..\VoidRadarContent\RadarContent.contentproj">
       <Name>RadarContent %28Content%29</Name>
       <XnaReferenceType>Content</XnaReferenceType>
       <Project>{88E8C7C6-758B-4271-8C41-50B451F6DA90}</Project>

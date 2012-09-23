@@ -42,7 +42,7 @@ namespace VoidRadar
         {
             get
             {
-                return Matrix.CreateTranslation(new Vector3(Position.X, Position.Y, 0)) * Matrix.CreateScale(Zoom) * Matrix.CreateTranslation(new Vector3(Radar.windowWidth / 2, Radar.windowHeight / 2, 0));
+                return Matrix.CreateRotationZ(MathHelper.ToRadians(180 + 90)) * Matrix.CreateTranslation(new Vector3(Position.X, Position.Y, 0)) * Matrix.CreateScale(Zoom) * Matrix.CreateTranslation(new Vector3(Radar.windowWidth / 2, Radar.windowHeight / 2, 0));
             }
         }
     }

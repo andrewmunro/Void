@@ -145,8 +145,13 @@ namespace VoidRadar
         public void DrawPoint(Icons icon, String text, Vector2 position)
         {
             Vector2 centerOffset = new Vector2(ObjectManager.Me.X, ObjectManager.Me.Y);
+
             position = Camera.WorldToScreen(position - centerOffset);
+            position.X = -position.X + windowWidth;
             Vector2 textSize = basicFont.MeasureString(text);
+
+            position = new Vector2((int)position.X, (int)position.Y);
+
             spriteBatch.Draw(iconLibrary[icon], position, Color.White);
             spriteBatch.DrawString(basicFont, text, position + new Vector2(-(int)(textSize.X / 2), 09), Color.Black);
             spriteBatch.DrawString(basicFont, text, position + new Vector2(-(int)(textSize.X / 2) - 1, 10), Color.Black);
@@ -167,7 +172,7 @@ namespace VoidRadar
             // TODO: Add your drawing code here
             spriteBatch.Begin();
             ObjectManager.Units.ForEach(unit => DrawUnit(unit));
-            DrawPoint(Icons.Me, "(" + ObjectManager.Me.Level + ") " + ObjectManager.Me.Name + "\n[" + ObjectManager.Me.Health + "/" + ObjectManager.Me.MaximumHealth + "]", new Vector2(ObjectManager.Me.X, ObjectManager.Me.Y));
+            DrawPoint(Icons.Me, "(" + ObjectManager.Me.Level + ") " + "Me" + "\n[" + ObjectManager.Me.Health + "/" + ObjectManager.Me.MaximumHealth + "]", new Vector2(ObjectManager.Me.X, ObjectManager.Me.Y));
             spriteBatch.End();
 
             base.Draw(gameTime);
