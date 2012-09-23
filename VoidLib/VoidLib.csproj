@@ -64,6 +64,7 @@
     <Compile Include="Common\Offsets.cs" />
     <Compile Include="Common\Point.cs" />
     <Compile Include="Common\Utilities.cs" />
+    <Compile Include="Helpers\SQLHelper.cs" />
     <Compile Include="Helpers\CTMHelper.cs" />
     <Compile Include="Helpers\LUAHelper.cs" />
     <Compile Include="Injection\Hook.cs" />
