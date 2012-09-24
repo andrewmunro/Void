@@ -41,6 +41,9 @@
       <HintPath>..\libs\fasmdll_managed.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Xna.Framework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
+    <Reference Include="MongoDB.Driver">
+      <HintPath>..\Libs\MongoDB.Driver.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -66,6 +69,7 @@
     <Compile Include="Common\Point.cs" />
     <Compile Include="Common\Utilities.cs" />
     <Compile Include="Helpers\AIHelper.cs" />
+    <Compile Include="Helpers\MongoHelper.cs" />
     <Compile Include="Helpers\ScriptHelper.cs" />
     <Compile Include="Helpers\SQLHelper.cs" />
     <Compile Include="Helpers\CTMHelper.cs" />
