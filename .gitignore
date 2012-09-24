@@ -1,5 +1,4 @@
 *.exe
-*.dll
 */bin/
 */obj/
 *.xnb

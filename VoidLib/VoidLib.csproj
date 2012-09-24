@@ -69,7 +69,6 @@
     <Compile Include="Common\Point.cs" />
     <Compile Include="Common\Utilities.cs" />
     <Compile Include="Globals.cs" />
-    <Compile Include="Helpers\AIHelper.cs" />
     <Compile Include="Helpers\MongoHelper.cs" />
     <Compile Include="Helpers\ScriptHelper.cs" />
     <Compile Include="Helpers\SQLHelper.cs" />

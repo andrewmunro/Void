@@ -28,7 +28,7 @@ namespace Playground
                 while (true)
                 {
                     Console.Clear();
-                    Console.WriteLine(AIHelper.getContinent());
+                    //Console.WriteLine(AIHelper.getContinent());
         
                     Thread.Sleep(1000);                    
                 }
