@@ -6,6 +6,7 @@ using MongoDB.Driver;
 using MongoDB.Driver.GridFS;
 using System.IO;
 using MongoDB.Driver.Builders;
+using MongoDB.Bson;
 
 namespace BlackRain.Helpers
 {
@@ -29,12 +30,13 @@ namespace BlackRain.Helpers
 
         static void upload()
         {
+            /*
             using (var fs = new FileStream(fileName, FileMode.Open))
             {
                 var gridFsInfo = database.GridFS.Upload(fs, fileName);
                 var fileId = gridFsInfo.Id;
 
-                ObjectId oid = new ObjectId(fileId);
+                ObjectId oid = new ObjectId((string)fileId);
                 var file = database.GridFS.FindOne(Query.EQ("id", oid));
 
                 using (var stream = file.OpenRead())
@@ -47,6 +49,7 @@ namespace BlackRain.Helpers
                     }
                 }
             }
+             * */
         }
     }
 }
