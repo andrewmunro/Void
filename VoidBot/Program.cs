@@ -10,6 +10,8 @@ namespace VoidBot
     {
         static void Main(string[] args)
         {
+            //ScriptManager.loadScript("../../Assets/01-10 Elwynn Forest.xml");
+            Console.Read();
         }
     }
 }

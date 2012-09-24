@@ -10,7 +10,7 @@ namespace VoidRadar
     public class Camera
     {
         public Vector2 Position = Vector2.Zero;
-        public float Zoom = 5;
+        public float Zoom = 0.5F;
 
         public Camera()
         {
@@ -42,7 +42,15 @@ namespace VoidRadar
         {
             get
             {
-                return Matrix.CreateRotationZ(MathHelper.ToRadians(180 + 90)) * Matrix.CreateTranslation(new Vector3(Position.X, Position.Y, 0)) * Matrix.CreateScale(Zoom) * Matrix.CreateTranslation(new Vector3(Radar.windowWidth / 2, Radar.windowHeight / 2, 0));
+                return Matrix.CreateRotationZ(MathHelper.ToRadians(180 + 90)) * Matrix.CreateTranslation(new Vector3(Position.X, Position.Y, 0)) * Matrix.CreateScale(Zoom / 2) * Matrix.CreateTranslation(new Vector3(Radar.windowWidth / 2, Radar.windowHeight / 2, 0));
+            }
+        }
+
+        public Matrix NormalMatrix
+        {
+            get
+            {
+                return Matrix.CreateTranslation(new Vector3(Position.X, Position.Y, 0)) * Matrix.CreateScale(Zoom ) * Matrix.CreateTranslation(new Vector3(Radar.windowWidth / 2, Radar.windowHeight / 2, 0));
             }
         }
     }
