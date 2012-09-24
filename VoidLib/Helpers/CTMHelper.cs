@@ -8,22 +8,7 @@ namespace VoidLib
 {
     public class CTMHelper
     {
-        public static void ClickToMove(float x, float y, float z, CTMAction action = CTMAction.WalkTo, ulong GUID = 0)
-        {
-            ObjectManager.Write<float>(ObjectManager.WowBaseAddress + (uint)CTM.CTM_Base + (uint)CTM.CTM_X, x);
-            ObjectManager.Write<float>(ObjectManager.WowBaseAddress + (uint)CTM.CTM_Base + (uint)CTM.CTM_Y, y);
-            ObjectManager.Write<float>(ObjectManager.WowBaseAddress + (uint)CTM.CTM_Base + (uint)CTM.CTM_Z, z);
-
-            if (GUID != 0)
-            {
-                ObjectManager.Write<ulong>(ObjectManager.WowBaseAddress + (uint)CTM.CTM_Base + (uint)CTM.CTM_GUID, GUID);
-            }
-
-            ObjectManager.Write<uint>(ObjectManager.WowBaseAddress + (uint)CTM.CTM_Base + (uint)CTM.CTM_Push, (uint)action);
-        }
-    }
-
-    public enum CTM : uint
+        public enum CTM : uint
         {
             CGPlayer_C__ClickToMove = 0x493760,     // 5.0.5 
             CTM_Base = 0xC2BD04,                    // 5.0.5 
@@ -48,7 +33,21 @@ namespace VoidLib
             AttackPos = 0xA,
             AttackGuid = 0xB,
             WalkAndRotate = 0xC
-        };
+        }
 
-       
+        public static void ClickToMove(float x, float y, float z, CTMAction action = CTMAction.WalkTo, ulong GUID = 0)
+        {
+            ObjectManager.Write<float>(ObjectManager.WowBaseAddress + (uint)CTM.CTM_Base + (uint)CTM.CTM_X, x);
+            ObjectManager.Write<float>(ObjectManager.WowBaseAddress + (uint)CTM.CTM_Base + (uint)CTM.CTM_Y, y);
+            ObjectManager.Write<float>(ObjectManager.WowBaseAddress + (uint)CTM.CTM_Base + (uint)CTM.CTM_Z, z);
+
+            if (GUID != 0)
+            {
+                ObjectManager.Write<ulong>(ObjectManager.WowBaseAddress + (uint)CTM.CTM_Base + (uint)CTM.CTM_GUID, GUID);
+            }
+
+            ObjectManager.Write<uint>(ObjectManager.WowBaseAddress + (uint)CTM.CTM_Base + (uint)CTM.CTM_Push, (uint)action);
+        }
+
+    }
 }

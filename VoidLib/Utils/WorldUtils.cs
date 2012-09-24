@@ -14,9 +14,14 @@ namespace BlackRain.Utils
             ObjectManager.Memory.WriteUInt64((uint)ObjectManager.Memory.MainModule.BaseAddress + 0xC6BC08, GUID);
         }
 
-        public static void targetGUID(WowUnit unit)
+        public static void TargetUnit(WowUnit unit)
         {
             ObjectManager.Memory.WriteUInt64((uint)ObjectManager.Memory.MainModule.BaseAddress + 0xC6BC08, unit.GUID);
+        }
+
+        public static void Interact()
+        {
+            LUAHelper.DoString("RunBinding(\"INTERACTTARGET\")");
         }
 
         public static Continent getContinent()

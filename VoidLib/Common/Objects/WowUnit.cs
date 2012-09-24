@@ -77,7 +77,7 @@ namespace BlackRain.Common.Objects
         /// </summary>
         public bool IsPlayer { get { return Type == 4; } }
 
-        public bool isHostile { get { return Reaction >= ReactionType.Neutral; } }
+        public bool isHostile { get { return Reaction <= ReactionType.Neutral; } }
 
         public bool isFriendly { get { return Reaction >= ReactionType.Friendly; } }
 
@@ -366,7 +366,7 @@ namespace BlackRain.Common.Objects
         /// </summary>
         public bool Dead
         {
-            get { return Health == 0 || Health == 1; }
+            get { return Health == 0 ; }
         }
 
         /// <summary>
