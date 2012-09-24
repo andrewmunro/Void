@@ -87,6 +87,8 @@ namespace VoidRadar
         Texture2D currentTile;
         Texture2D[,] tileMap;
 
+        static int distance = 12;
+
         Texture2D lineTexture;
         /// <summary>
         /// LoadContent will be called once per game and is the place to load
@@ -107,22 +109,23 @@ namespace VoidRadar
             int blockX = (int)Math.Floor((32 - (ObjectManager.Me.X / 533.33333f)));
             int blockY = (int)Math.Floor((32 - (ObjectManager.Me.Y / 533.33333f)));
 
-            currentTile = Content.Load<Texture2D>("Tiles/East/map" + blockY + "_" + blockX);
+            currentTile = Content.Load<Texture2D>("Tiles/West/map" + blockY + "_" + blockX);
             lineTexture = Content.Load<Texture2D>("linetexture");
 
 
-            tileMap = new Texture2D[6, 6];
-            for (int x = 0; x < 12; x++)
-            for (int y = 0; y < 12; y++)
+            tileMap = new Texture2D[distance, distance];
+            for (int x = 0; x < distance; x++)
+                for (int y = 0; y < distance; y++)
             {
+                int yTile = ((blockY + y) - (distance / 2));
+                int xTile = ((blockX + x) - (distance / 2));
                 try
                 {
-                    tileMap[x, y] = Content.Load<Texture2D>("Tiles/East/map" + ((blockY + y) - 3) + "_" + ((blockX + x) - 3));
-                    Console.WriteLine("Good");
+                    tileMap[x, y] = Content.Load<Texture2D>("Tiles/West/map" + yTile  + "_" + xTile);
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine("Fail..");
+                    Console.WriteLine("Fail [" + "Tiles/East/map" + yTile + "_" + xTile + "]");
                 }
             }
 
@@ -266,12 +269,12 @@ namespace VoidRadar
 
             Vector2 pos = -new Vector2(256 * Math.Abs(smallY), 256 * Math.Abs(smallX));
 
-            for (int x = 0; x < 6; x++)
-                for (int y = 0; y < 6; y++)
+            for (int x = 0; x < distance; x++)
+                for (int y = 0; y < distance; y++)
                 {
                     if (tileMap[y, x] != null)
                     {
-                        spriteBatch.Draw(tileMap[y, x], pos + new Vector2(256 * x, 256 * y) - new Vector2(256 * 3, 256 * 3), Color.White);
+                        spriteBatch.Draw(tileMap[y, x], pos + new Vector2(256 * x, 256 * y) - new Vector2(256 * (distance / 2), 256 * (distance / 2)), Color.White);
                     }
                 }
 
