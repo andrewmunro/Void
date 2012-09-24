@@ -1,6 +1,7 @@
 ﻿using System.Collections.Specialized;
 using System;
 using BlackRain.Helpers;
+using BlackRain.Utils;
 
 namespace BlackRain.Common.Objects
 {
@@ -137,9 +138,9 @@ namespace BlackRain.Common.Objects
                 {
                     ulong currentTarget = ObjectManager.Me.TargetGUID;
 
-                    AIHelper.targetGUID(GUID);
+                    WorldUtils.targetGUID(GUID);
                     uint _Reaction = uint.Parse(LUAHelper.GetLUA("UnitReaction(\"player\", \"target\")"));
-                    AIHelper.targetGUID(currentTarget);
+                    WorldUtils.targetGUID(currentTarget);
 
                     Console.WriteLine("Loaded new reaction");
                     cacheReaction = (ReactionType)_Reaction;

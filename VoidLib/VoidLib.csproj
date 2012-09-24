@@ -65,6 +65,7 @@
     <Compile Include="Common\Offsets.cs" />
     <Compile Include="Common\Point.cs" />
     <Compile Include="Common\Utilities.cs" />
+    <Compile Include="Globals.cs" />
     <Compile Include="Helpers\AIHelper.cs" />
     <Compile Include="Helpers\ScriptHelper.cs" />
     <Compile Include="Helpers\SQLHelper.cs" />
@@ -72,6 +73,8 @@
     <Compile Include="Helpers\LUAHelper.cs" />
     <Compile Include="Injection\Hook.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\BotUtils.cs" />
+    <Compile Include="Utils\WorldUtils.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
