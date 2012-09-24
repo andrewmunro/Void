@@ -112,17 +112,18 @@ namespace VoidRadar
 
 
             tileMap = new Texture2D[6, 6];
-            for (int x = 0; x < 12; x++)
-            for (int y = 0; y < 12; y++)
+            for (int x = 0; x < 6; x++)
+            for (int y = 0; y < 6; y++)
             {
+                int yTile = ((blockY + y) - 3);
+                int xTile = ((blockX + x) - 3);
                 try
                 {
-                    tileMap[x, y] = Content.Load<Texture2D>("Tiles/East/map" + ((blockY + y) - 3) + "_" + ((blockX + x) - 3));
-                    Console.WriteLine("Good");
+                    tileMap[x, y] = Content.Load<Texture2D>("Tiles/East/map" + yTile  + "_" + xTile);
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine("Fail..");
+                    Console.WriteLine("Fail [" + "Tiles/East/map" + yTile + "_" + xTile + "]");
                 }
             }
 
