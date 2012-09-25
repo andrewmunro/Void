@@ -3,11 +3,9 @@ Void
 
 Not a wow bot!
 
-Research
-====
 
 Hooking
-==
+=
 
     http://www.thebuddyforum.com/archives/5113-apocs-lua-event-hooks-beta.html
     http://www.ownedcore.com/forums/world-of-warcraft/world-of-warcraft-bots-programs/wow-memory-editing/341648-src-c-bananahook-simple-abstracted-api-hooking-library.html
