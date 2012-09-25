@@ -5,7 +5,7 @@ Not a wow bot!
 
 
 Hooking
-=
+==
 
     http://www.thebuddyforum.com/archives/5113-apocs-lua-event-hooks-beta.html
     http://www.ownedcore.com/forums/world-of-warcraft/world-of-warcraft-bots-programs/wow-memory-editing/341648-src-c-bananahook-simple-abstracted-api-hooking-library.html
@@ -75,38 +75,38 @@ Rendering
 
 
 
-http://www.ownedcore.com/forums/world-of-warcraft/world-of-warcraft-bots-programs/wow-memory-editing/307988-example-c-bot-base-4-0-1-a.html
+    http://www.ownedcore.com/forums/world-of-warcraft/world-of-warcraft-bots-programs/wow-memory-editing/307988-example-c-bot-base-4-0-1-a.html
 
-http://www.ownedcore.com/forums/world-of-warcraft/world-of-warcraft-bots-programs/wow-memory-editing/315561-cleancore-3.html
+    http://www.ownedcore.com/forums/world-of-warcraft/world-of-warcraft-bots-programs/wow-memory-editing/315561-cleancore-3.html
 
-http://www.progamercity.net/wow-hacks/3891-source-c-memory-pixel-bot-world-warcraft.html
-
-
-
-
-
-
-http://www.pudn.com/downloads186/sourcecode/windows/csharp/detail873185.html
-
-https://github.com/tanis2000/babbot
-http://www.pudn.com/downloads186/sourcecode/windows/csharp/detail873185.html
+    http://www.progamercity.net/wow-hacks/3891-source-c-memory-pixel-bot-world-warcraft.html
 
 
 
 
 
 
-public int GetAggroRadius(CreatureObject LocalPlayer)
-       {
-           // if they are the same level as us, the aggro radius is roughly 20 yards
-           int AggroRadius = 20;
-           // aggro radius varies with level difference at a rate of roughly 1 yard/level
-           if (LocalPlayer.Level > Level)
-               AggroRadius -= (int)BotControl.DifferenceBetween(LocalPlayer.Level, Level);
-           if (LocalPlayer.Level < Level)
-               AggroRadius += (int)BotControl.DifferenceBetween(LocalPlayer.Level, Level);
-           if (AggroRadius < 5)
-               AggroRadius = 5;
-           AggroRadius += 3; // give us a bit of leeway
-           return AggroRadius;
-       }
+    http://www.pudn.com/downloads186/sourcecode/windows/csharp/detail873185.html
+
+    https://github.com/tanis2000/babbot
+    http://www.pudn.com/downloads186/sourcecode/windows/csharp/detail873185.html
+
+
+
+
+
+
+    public int GetAggroRadius(CreatureObject LocalPlayer)
+           {
+               // if they are the same level as us, the aggro radius is roughly 20 yards
+               int AggroRadius = 20;
+               // aggro radius varies with level difference at a rate of roughly 1 yard/level
+               if (LocalPlayer.Level > Level)
+                   AggroRadius -= (int)BotControl.DifferenceBetween(LocalPlayer.Level, Level);
+               if (LocalPlayer.Level < Level)
+                   AggroRadius += (int)BotControl.DifferenceBetween(LocalPlayer.Level, Level);
+               if (AggroRadius < 5)
+                   AggroRadius = 5;
+               AggroRadius += 3; // give us a bit of leeway
+               return AggroRadius;
+           }
