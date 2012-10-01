@@ -2,6 +2,7 @@
 using System;
 using BlackRain.Helpers;
 using BlackRain.Utils;
+using System.Collections.Generic;
 
 namespace BlackRain.Common.Objects
 {
@@ -127,31 +128,37 @@ namespace BlackRain.Common.Objects
             }
         }
 
-
-        private ReactionType cacheReaction = ReactionType.Unknown;
+        private static Dictionary<string, ReactionType> reactionCacheList = new Dictionary<string, ReactionType>();
 
         public ReactionType Reaction
         {
             get
             {
-                if (cacheReaction == ReactionType.Unknown)
+                try
                 {
-                    ulong currentTarget = ObjectManager.Me.TargetGUID;
+                    if (!reactionCacheList.ContainsKey(Name))
+                    {
+                        ulong currentTarget = ObjectManager.Me.TargetGUID;
 
-                    WorldUtils.targetGUID(GUID);
-                    uint _Reaction = uint.Parse(LUAHelper.GetLUA("UnitReaction(\"player\", \"target\")"));
-                    WorldUtils.targetGUID(currentTarget);
+                        WorldUtils.targetGUID(GUID);
+                        uint _Reaction = uint.Parse(LUAHelper.GetLUA("UnitReaction(\"player\", \"target\")"));
+                        WorldUtils.targetGUID(currentTarget);
 
-                    Console.WriteLine("Loaded new reaction");
-                    cacheReaction = (ReactionType)_Reaction;
+                        Console.WriteLine("[Reaction] " + Name + " -> " + (ReactionType)_Reaction);
 
-                    return (ReactionType)_Reaction;
+                        reactionCacheList.Add(Name, (ReactionType)_Reaction);
+
+                        return (ReactionType)_Reaction;
+                    }
+                    else
+                    {
+                        return reactionCacheList[Name];
+                    }
                 }
-                else
+                catch
                 {
-                    return cacheReaction;
+                    return ReactionType.Unknown;
                 }
-
                 
             
             }

@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using VoidBot.Core.Managers;
 using System.Threading;
+using BlackRain.Helpers;
+using System.Diagnostics;
+using BlackRain.Common.Objects;
 
 namespace VoidBot
 {
@@ -11,13 +14,25 @@ namespace VoidBot
     {
         static void Main(string[] args)
         {
-            while (true)
+            var proc = Process.GetProcessesByName("wow");
+
+            foreach (var p in proc)
             {
-                NavigationManager.DoNavigation();
-                Thread.Sleep(1000);
+                ObjectManager.Initialize(p);
+                ObjectManager.Pulse();
+
+                ScriptHelper.loadScript("01-10 Elwynn Forest.xml");
+
+                while (true)
+                {
+                    NavigationManager.DoNavigation();
+                    Thread.Sleep(1000);
+                }
+                //ScriptManager.loadScript("../../Assets/01-10 Elwynn Forest.xml");
+
+
+                Console.Read();
             }
-            //ScriptManager.loadScript("../../Assets/01-10 Elwynn Forest.xml");
-            Console.Read();
         }
     }
 }

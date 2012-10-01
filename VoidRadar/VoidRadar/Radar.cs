@@ -16,32 +16,40 @@ using System.Diagnostics;
 using System.Threading;
 using VoidBot.Core.Managers;
 using BlackRain.Helpers;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
+using VoidRadar.Tools;
+using VoidRadar.Map;
+using BlackRain.Navigation;
+using BlackRain.Navigation.Pathfinding;
 
 namespace VoidRadar
 {
-    /// <summary>
-    /// This is the main type for your game
-    /// </summary>
+    public enum Icons
+    {
+        Player,
+        Me,
+        Mob,
+        NPC,
+        WP,
+        Critter
+    }
+
     public class Radar : Microsoft.Xna.Framework.Game
     {
-        GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
+        private GraphicsDeviceManager graphics;
+        private SpriteBatch spriteBatch;
+
+        public MapManager MapManager;
+        public Camera Camera;
+        public LineDrawer Line;
+
         private Dictionary<Icons, Texture2D> iconLibrary;
         private SpriteFont basicFont;
-        private Texture2D linetexture;
-        public Camera Camera;
+
+        // [Remove]
         public static int windowHeight;
         public static int windowWidth;
-
-        public enum Icons
-        {
-            Player,
-            Me,
-            Mob,
-            NPC,
-            WP,
-            Critter
-        }
 
         private void AddIcon(Icons iconEnum, String iconURL)
         {
@@ -52,6 +60,7 @@ namespace VoidRadar
         private void LoadIcons()
         {
             iconLibrary = new Dictionary<Icons, Texture2D>();
+
             AddIcon(Icons.Me, "Icons//Green_Small");
             AddIcon(Icons.Player, "Icons//Blue_Small");
             AddIcon(Icons.Mob, "Icons//Red_Small");
@@ -66,86 +75,71 @@ namespace VoidRadar
             Content.RootDirectory = "Content";
         }
 
-        /// <summary>
-        /// Allows the game to perform any initialization it needs to before starting to run.
-        /// This is where it can query for any required services and load any non-graphic
-        /// related content.  Calling base.Initialize will enumerate through any components
-        /// and initialize them as well.
-        /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
             LoadIcons();
             basicFont = Content.Load<SpriteFont>("basicFont");
-            linetexture = Content.Load<Texture2D>("linetexture");
+            
             windowWidth = GraphicsDevice.PresentationParameters.BackBufferWidth;
             windowHeight = GraphicsDevice.PresentationParameters.BackBufferHeight;
+
+            TileCache.Boot();
             Camera = new Camera();
+            MapManager = new MapManager();
+            Line = new LineDrawer();
+
             base.Initialize();
         }
 
-        Texture2D currentTile;
-        Texture2D[,] tileMap;
-
-        static int distance = 12;
-
-        Texture2D lineTexture;
-        /// <summary>
-        /// LoadContent will be called once per game and is the place to load
-        /// all of your content.
-        /// </summary>
         protected override void LoadContent()
         {
-            // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            ScriptHelper.loadScript("01-10 Elwynn Forest.xml");
+
+            TileCache.LoadContent(Content);
+            Line.LoadContent(Content, spriteBatch);
+
             var proc = Process.GetProcessesByName("wow");
-                        foreach (var p in proc)
-            {
-                ObjectManager.Initialize(p);
-                ObjectManager.Pulse();
-            }
-
-            int blockX = (int)Math.Floor((32 - (ObjectManager.Me.X / 533.33333f)));
-            int blockY = (int)Math.Floor((32 - (ObjectManager.Me.Y / 533.33333f)));
-
-            currentTile = Content.Load<Texture2D>("Tiles/West/map" + blockY + "_" + blockX);
-            lineTexture = Content.Load<Texture2D>("linetexture");
-
-
-            tileMap = new Texture2D[distance, distance];
-            for (int x = 0; x < distance; x++)
-                for (int y = 0; y < distance; y++)
-            {
-                int yTile = ((blockY + y) - (distance / 2));
-                int xTile = ((blockX + x) - (distance / 2));
-                try
-                {
-                    tileMap[x, y] = Content.Load<Texture2D>("Tiles/West/map" + yTile  + "_" + xTile);
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine("Fail [" + "Tiles/East/map" + yTile + "_" + xTile + "]");
-                }
-            }
-
+            ObjectManager.Initialize(proc[0]);
+            ObjectManager.Pulse();
         }
 
         protected override void UnloadContent()
         {
-
         }
 
         protected override void Update(GameTime gameTime)
         {
+            KeyboardInput.UpdateStart();
+
             Camera.Update(gameTime);
+            MapManager.Update(gameTime);
+
+            WaypointRecorder.Update();
 
 
+            if(KeyboardInput.isKeyPressed(Keys.F1))
+            {
+                WaypointRecorder.Recording = !WaypointRecorder.Recording;
+            }
 
+            if (KeyboardInput.isKeyPressed(Keys.F2))
+            {
+                List<Waypoint> sortWaypoints = WaypointManager.waypoints.OrderBy(wp => Vector2.Distance(wp.Position, new Vector2(ObjectManager.Me.X, ObjectManager.Me.Y))).ToList();
+
+                WaypointRecorder.lastWaypoint = sortWaypoints[0];
+            }
+
+            if (KeyboardInput.isKeyPressed(Keys.F3))
+            {
+                List<Waypoint> sortWaypoints = WaypointManager.waypoints.OrderBy(wp => Vector2.Distance(wp.Position, new Vector2(ObjectManager.Me.X, ObjectManager.Me.Y))).ToList();
+                //PathFinder.findPath(
+                List<PathNode> list = PathFinder.findPath(sortWaypoints[sortWaypoints.Count - 1], sortWaypoints[0]);
+                Console.WriteLine(list);
+            }
+            
             UpdateEntities(gameTime);
-            // TODO: Add your update logic here
 
-            base.Update(gameTime);
+            KeyboardInput.UpdateEnd();
         }
 
         private const int TICK_TIME = 500;
@@ -162,17 +156,6 @@ namespace VoidRadar
             }
         }
 
-        public void DrawLine(Texture2D texture, Vector2 start, Vector2 end)
-        {
-            spriteBatch.Begin();
-            spriteBatch.Draw(texture, start, null, Color.Red,
-                             (float)Math.Atan2(end.Y - start.Y, end.X - start.X),
-                             new Vector2(0f, (float)texture.Height / 2),
-                             new Vector2(Vector2.Distance(start, end), 1f),
-                             SpriteEffects.None, 0f);
-            spriteBatch.End();
-        }
-
         public void DrawUnit(WowUnit unit)
         {
             if (unit.IsPlayer)
@@ -180,8 +163,7 @@ namespace VoidRadar
                 if (unit.isFriendly) { DrawPoint(Icons.Player, "(" + unit.Level + ") " + unit.Name + "\n      [" + unit.Health + "/" + unit.MaximumHealth + "]", new Vector2(unit.X, unit.Y)); }
                 else { DrawPoint(Icons.Mob, "(" + unit.Level + ") " + unit.Name + "\n      [" + unit.Health + "/" + unit.MaximumHealth + "]", new Vector2(unit.X, unit.Y)); }
             }
-            // if (unit.isFriendly)
-            //{
+
             if (unit.Critter)
             {
                 DrawPoint(Icons.Critter, "(" + unit.Level + ") " + unit.Name + "\n      [" + unit.Health + "/" + unit.MaximumHealth + "]", new Vector2(unit.X, unit.Y));
@@ -190,18 +172,18 @@ namespace VoidRadar
             {
                 DrawPoint(Icons.NPC, "(" + unit.Level + ") " + unit.Name + "\n      [" + unit.Health + "/" + unit.MaximumHealth + "]", new Vector2(unit.X, unit.Y));
             }
-            /* }
-             if (unit.isHostile)
-             {
-                 DrawPoint(Icons.Mob, "(" + unit.Level + ") " + unit.Name + "\n      [" + unit.Health + "/" + unit.MaximumHealth + "]", new Vector2(unit.X, unit.Y));
-             }
-                         */
-
         }
 
-        public void DrawWp(Vector3 waypoint)
+        public void DrawWp(Waypoint waypoint)
         {
-            DrawPoint(Icons.WP, "", new Vector2(waypoint.X, waypoint.Y));
+            if (waypoint == WaypointRecorder.lastWaypoint)
+            {
+                DrawPoint(Icons.Mob, "", new Vector2(waypoint.Position.X, waypoint.Position.Y));
+            }
+            else
+            {
+                DrawPoint(Icons.WP, "", new Vector2(waypoint.Position.X, waypoint.Position.Y));
+            }
         }
 
         public Vector2 wowToScreen(Vector2 position)
@@ -214,16 +196,12 @@ namespace VoidRadar
             return position;
         }
 
-        public void DrawLine(Vector3 waypoint1, Vector3 waypoint2)
+        public void DrawLine(Vector2 waypoint1, Vector2 waypoint2)
         {
             Vector2 start = wowToScreen(new Vector2(waypoint1.X, waypoint1.Y));
             Vector2 end = wowToScreen(new Vector2(waypoint2.X, waypoint2.Y));
 
-            spriteBatch.Draw(linetexture, start, null, Color.White,
-                             (float)Math.Atan2(end.Y - start.Y, end.X - start.X),
-                             new Vector2(0f, (float)linetexture.Height / 2),
-                             new Vector2(Vector2.Distance(start, end), 1f),
-                             SpriteEffects.None, 0f);
+            Line.Draw(start, end);
         }
 
         public void DrawPoint(Icons icon, String text, Vector2 position)
@@ -245,83 +223,28 @@ namespace VoidRadar
             spriteBatch.DrawString(basicFont, text, position + new Vector2(-(int)(textSize.X / 2) + 1, 10), Color.Black);
 
             spriteBatch.DrawString(basicFont, text, position + new Vector2(-(int)(textSize.X / 2), 10), Color.White);
-             * */
-             
+               */         
         }
+        
 
-
-        /// <summary>
-        /// This is called when the game should draw itself.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            int blockX = (int)Math.Floor((32 - (ObjectManager.Me.X / 533.33333f)));
-            int blockY = (int)Math.Floor((32 - (ObjectManager.Me.Y / 533.33333f)));
-            float smallX = (blockX - ((32 - (ObjectManager.Me.X / 533.33333f))));
-            float smallY = (blockY - ((32 - (ObjectManager.Me.Y / 533.33333f))));
+            GraphicsDevice.Clear(Color.Tomato);
 
-            GraphicsDevice.Clear(Color.CornflowerBlue);
-            // TODO: Add your drawing code here
-            
+            // [Map]
             spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied, SamplerState.AnisotropicClamp, DepthStencilState.Default, RasterizerState.CullNone, null, Camera.NormalMatrix);
-
-
-            Vector2 pos = -new Vector2(256 * Math.Abs(smallY), 256 * Math.Abs(smallX));
-
-            for (int x = 0; x < distance; x++)
-                for (int y = 0; y < distance; y++)
-                {
-                    if (tileMap[y, x] != null)
-                    {
-                        spriteBatch.Draw(tileMap[y, x], pos + new Vector2(256 * x, 256 * y) - new Vector2(256 * (distance / 2), 256 * (distance / 2)), Color.White);
-                    }
-                }
-
-
-            spriteBatch.Draw(currentTile, -new Vector2(256 * Math.Abs(smallY), 256 * Math.Abs(smallX)) , Color.White);
+            MapManager.Draw(spriteBatch);
             spriteBatch.End();
 
-
+            // [Icons]
             spriteBatch.Begin();
-            ObjectManager.Units.ForEach(unit => DrawUnit(unit));
-            switch(NavigationManager.currentPath)
-            {
-                case(CurrentPath.WayPoints):
-                    for (var i = 0; i < ScriptHelper.Waypoints.Count - 1; i++)
-                    {
-                        DrawLine(ScriptHelper.Waypoints[i], ScriptHelper.Waypoints[i + 1]);
-                    }
-                    ScriptHelper.Waypoints.ForEach(waypoint => DrawWp(waypoint));
-                    break;
-                case(CurrentPath.GhostWaypoints):
-                    for (var i = 0; i < ScriptHelper.GhostWaypoints.Count - 1; i++)
-                    {
-                        DrawLine(ScriptHelper.GhostWaypoints[i], ScriptHelper.GhostWaypoints[i + 1]);
-                    }
-                    ScriptHelper.GhostWaypoints.ForEach(waypoint => DrawWp(waypoint));
-                    break;
-                case(CurrentPath.RepairWaypoints):
-                    for (var i = 0; i < ScriptHelper.RepairWaypoints.Count - 1; i++)
-                    {
-                        DrawLine(ScriptHelper.RepairWaypoints[i], ScriptHelper.RepairWaypoints[i + 1]);
-                    }
-                    ScriptHelper.RepairWaypoints.ForEach(waypoint => DrawWp(waypoint));
-                    break;
-                case(CurrentPath.VendorWaypoints):
-                    for (var i = 0; i < ScriptHelper.VendorWaypoints.Count - 1; i++)
-                    {
-                        DrawLine(ScriptHelper.VendorWaypoints[i], ScriptHelper.VendorWaypoints[i + 1]);
-                    }
-
-                    ScriptHelper.VendorWaypoints.ForEach(waypoint => DrawWp(waypoint));
-                    break;
-                default:
-                    break;
-            }
+            //ObjectManager.Units.ForEach(unit => DrawUnit(unit));
             DrawPoint(Icons.Me, "(" + ObjectManager.Me.Level + ") " + "Me" + "\n[" + ObjectManager.Me.Health + "/" + ObjectManager.Me.MaximumHealth + "]", new Vector2(ObjectManager.Me.X, ObjectManager.Me.Y));
-            spriteBatch.End();
 
+            WaypointManager.waypoints.ForEach(wp => DrawWp(wp));
+            WaypointManager.waypoints.ForEach(wp => wp.Connections.ForEach(con => DrawLine(wp.Position, con.Position)));
+
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }

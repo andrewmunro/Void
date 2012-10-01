@@ -7,6 +7,7 @@ using BlackRain.Common;
 using VoidLib;
 using Microsoft.Xna.Framework;
 using System.Threading;
+using BlackRain.Helpers;
 
 namespace BlackRain.Utils
 {
@@ -14,8 +15,8 @@ namespace BlackRain.Utils
     {
         public static List<WowUnit> getMobsWithBeef()
         {
-            return ObjectManager.Units.FindAll(unit => unit.IsUnit && unit.HasUnitFlag(Offsets.UnitFlags.Combat) &&
-                                              (unit.TargetGUID == ObjectManager.Me.GUID || (ObjectManager.Me.HasPet && unit.Target == ObjectManager.Me.Pet)));
+
+            return ObjectManager.Units.FindAll(unit => ObjectManager.Me.Combat && (unit.TargetGUID == ObjectManager.Me.GUID || (ObjectManager.Me.HasPet && unit.Target == ObjectManager.Me.Pet)));
         }
 
         public static void AttackUnit(WowUnit unit, float minDistance = 4f)
@@ -28,14 +29,43 @@ namespace BlackRain.Utils
             }
         }
 
+        public static void MoveToUnit(WowUnit unit)
+        {
+            CTMHelper.ClickToMove(unit.X, unit.Y, 0, CTMHelper.CTMAction.WalkTo, unit.GUID);
+        }
+
         public static void InteractUnit(WowUnit unit, float minDistance = 4f)
         {
-            CTMHelper.ClickToMove(unit.X, unit.Y, 0, CTMHelper.CTMAction.Loot, unit.GUID);
+            CTMHelper.ClickToMove(unit.X, unit.Y, 0, CTMHelper.CTMAction.InteractNpc, unit.GUID);
+        }
+
+        public static void StopMovement()
+        {
+            CTMHelper.ClickToMove(0, 0, 0, CTMHelper.CTMAction.Stop);
         }
 
         public static void LookAtUnit(WowUnit unit)
         {
-            CTMHelper.ClickToMove(ObjectManager.Me.X, ObjectManager.Me.Y, ObjectManager.Me.Z, CTMHelper.CTMAction.FaceTarget, unit.GUID);
+            CTMHelper.ClickToMove(unit.X, unit.Y, unit.Z, CTMHelper.CTMAction.FaceTarget, unit.GUID);
+        }
+
+        public static void CastSpell(string spell)
+        {
+            LUAHelper.DoString("CastSpellByName(\"" + spell + "\")");
+        }
+
+        public static bool IsOnCooldown(string spell)
+        {
+            LUAHelper.DoString("start, duration, enabled = GetSpellCooldown(\"" + spell + "\");");
+            Thread.Sleep(100);
+            try
+            {
+                return int.Parse(LUAHelper.GetLocalizedText("duration")) > 0;
+            }
+            catch
+            {
+                return true;
+            }
         }
     }
 }
