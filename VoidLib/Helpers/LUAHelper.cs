@@ -23,6 +23,7 @@ namespace BlackRain.Helpers
 
         public static void ResumeMainWowThread()
         {
+            if (MyHook == null) MyHook = new Hook((uint)ObjectManager.WowProcess.Id, (uint)ObjectManager.WowProcess.MainModule.BaseAddress);
             ProcessThread wowMainThread = SThread.GetMainThread((int)MyHook._processId);
             IntPtr hThread = SThread.OpenThread(wowMainThread.Id);
             SThread.ResumeThread(hThread);
@@ -70,7 +71,7 @@ namespace BlackRain.Helpers
             try
             {
                 MyHook.Memory.Asm.InjectAndExecute(codecave);
-                Console.WriteLine("[DoString] Ran: " + command);
+                //Console.WriteLine("[DoString] Ran: " + command);
                 Thread.Sleep(10);
             }
             catch (Exception e)

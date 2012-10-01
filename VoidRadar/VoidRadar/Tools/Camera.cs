@@ -5,12 +5,12 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
-namespace VoidRadar
+namespace VoidRadar.Tools
 {
     public class Camera
     {
         public Vector2 Position = Vector2.Zero;
-        public float Zoom = 0.5F;
+        public float Zoom = 2;
 
         public Camera()
         {
@@ -50,7 +50,7 @@ namespace VoidRadar
         {
             get
             {
-                return Matrix.CreateTranslation(new Vector3(Position.X, Position.Y, 0)) * Matrix.CreateScale(Zoom ) * Matrix.CreateTranslation(new Vector3(Radar.windowWidth / 2, Radar.windowHeight / 2, 0));
+                return Matrix.CreateTranslation(new Vector3(Position.X, Position.Y, 0)) * Matrix.CreateScale(Zoom) * Matrix.CreateTranslation(new Vector3(Radar.windowWidth / 2, Radar.windowHeight / 2, 0));
             }
         }
     }

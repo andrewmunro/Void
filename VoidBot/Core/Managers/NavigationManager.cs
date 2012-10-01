@@ -34,20 +34,27 @@ namespace VoidBot.Core.Managers
         public static void move(List<Vector3> ways, int nextway)
         {
             Vector3 waypoint = ways[nextway];
-            if (distance(waypoint) < 0.05f)
+
+            Console.WriteLine(distance(waypoint));
+
+            if (distance(waypoint) < 0.5f)
             {
                 if (nextway == ways.Count)
                 {
+                    Console.WriteLine("Reset");
                     nextway = 0;
                 }
                 else
                 {
-                    nextway++;
+                    nextWaypoint++;
+                    Console.WriteLine("Waypoint: " + nextway);
+                    CTMHelper.ClickToMove(ways[nextway].X, ways[nextway].Y, ways[nextway].Z);
                 }
             }
             else
             {
                 CTMHelper.ClickToMove(waypoint.X, waypoint.Y, waypoint.Z);
+                
             }
         }
 
