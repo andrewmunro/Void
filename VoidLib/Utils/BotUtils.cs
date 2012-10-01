@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using BlackRain.Common.Objects;
-using BlackRain.Common;
+using VoidLib.Common.Objects;
+using VoidLib.Common;
 using VoidLib;
 using Microsoft.Xna.Framework;
 using System.Threading;
-using BlackRain.Helpers;
+using VoidLib.Helpers;
 
-namespace BlackRain.Utils
+namespace VoidLib.Utils
 {
     public class BotUtils
     {
@@ -39,6 +39,11 @@ namespace BlackRain.Utils
             CTMHelper.ClickToMove(unit.X, unit.Y, 0, CTMHelper.CTMAction.InteractNpc, unit.GUID);
         }
 
+        public static void InteractObject(WowObject obj, float minDistance = 4f)
+        {
+            CTMHelper.ClickToMove(obj.X, obj.Y, 0, CTMHelper.CTMAction.InteractObject, obj.GUID);
+        }
+
         public static void StopMovement()
         {
             CTMHelper.ClickToMove(0, 0, 0, CTMHelper.CTMAction.Stop);
@@ -53,6 +58,15 @@ namespace BlackRain.Utils
         {
             LUAHelper.DoString("CastSpellByName(\"" + spell + "\")");
         }
+
+        public static void Dismount()
+        {
+            if (int.Parse(LUAHelper.GetLUA("IsMounted()")) == 1)
+            {
+                LUAHelper.DoString("Dismount()");
+            }
+        }
+
 
         public static bool IsOnCooldown(string spell)
         {

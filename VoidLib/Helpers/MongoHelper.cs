@@ -8,7 +8,7 @@ using System.IO;
 using MongoDB.Driver.Builders;
 using MongoDB.Bson;
 
-namespace BlackRain.Helpers
+namespace VoidLib.Helpers
 {
     static class MongoHelper
     {

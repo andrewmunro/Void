@@ -4,7 +4,7 @@ using System.Drawing;
 using System.IO;
 using System.Threading;
 
-namespace BlackRain.Common
+namespace VoidLib.Common
 {
     /// <summary>
     /// This class handles all logging done for OpenBot. From simple output, to writing to files, to logging exceptions

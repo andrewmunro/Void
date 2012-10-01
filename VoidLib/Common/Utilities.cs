@@ -2,7 +2,7 @@
 using System.IO;
 using System.Reflection;
 
-namespace BlackRain.Common
+namespace VoidLib.Common
 {
     /// <summary>
     /// A class with utilities that can be used.

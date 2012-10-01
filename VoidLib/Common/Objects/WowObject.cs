@@ -1,4 +1,4 @@
-﻿namespace BlackRain.Common.Objects
+﻿namespace VoidLib.Common.Objects
 {
     /// <summary>
     /// An Object. Everything that inherits from WowObject, such as an item, is also an object.

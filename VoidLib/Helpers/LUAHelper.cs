@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using BlackRain.Injection;
-using BlackRain.Common.Objects;
+using VoidLib.Injection;
+using VoidLib.Common.Objects;
 using System.Threading;
 using Magic;
 using System.Diagnostics;
 
-namespace BlackRain.Helpers
+namespace VoidLib.Helpers
 {
     public class LUAHelper
     {

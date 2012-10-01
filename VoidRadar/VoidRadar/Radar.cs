@@ -8,20 +8,19 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
-using VoidLib;
 using VoidBot;
-using BlackRain.Common;
-using BlackRain.Common.Objects;
+using VoidLib.Common;
+using VoidLib.Common.Objects;
 using System.Diagnostics;
 using System.Threading;
 using VoidBot.Core.Managers;
-using BlackRain.Helpers;
+using VoidLib.Helpers;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using VoidRadar.Tools;
 using VoidRadar.Map;
-using BlackRain.Navigation;
-using BlackRain.Navigation.Pathfinding;
+using VoidLib.Navigation;
+using VoidLib.Navigation.Pathfinding;
 
 namespace VoidRadar
 {

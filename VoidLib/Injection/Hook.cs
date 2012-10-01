@@ -5,7 +5,7 @@ using System.Text;
 using Magic;
 using System.Threading;
 
-namespace BlackRain.Injection
+namespace VoidLib.Injection
 {
     public class Hook
     {

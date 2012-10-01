@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using VoidBot.Core.Managers;
 using System.Threading;
-using BlackRain.Helpers;
+using VoidLib.Helpers;
 using System.Diagnostics;
-using BlackRain.Common.Objects;
+using VoidLib.Common.Objects;
 
 namespace VoidBot
 {

@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using BlackRain.Common.Objects;
+using VoidLib.Common.Objects;
 using System.Diagnostics;
 using System.Threading;
-using BlackRain.Common;
+using VoidLib.Common;
 using Magic;
 using VoidLib;
-using BlackRain.Helpers;
+using VoidLib.Helpers;
 using Microsoft.Xna.Framework;
-using BlackRain.Utils;
+using VoidLib.Utils;
 
 namespace Playground
 {

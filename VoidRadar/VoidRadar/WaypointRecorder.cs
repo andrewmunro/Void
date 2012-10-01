@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
-using BlackRain.Common.Objects;
+using VoidLib.Common.Objects;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
-using BlackRain.Navigation;
+using VoidLib.Navigation;
 
 namespace VoidRadar
 {

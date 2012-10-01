@@ -1,10 +1,10 @@
 ﻿using System.Collections.Specialized;
 using System;
-using BlackRain.Helpers;
-using BlackRain.Utils;
+using VoidLib.Helpers;
+using VoidLib.Utils;
 using System.Collections.Generic;
 
-namespace BlackRain.Common.Objects
+namespace VoidLib.Common.Objects
 {
     /// <summary>
     /// An unit, such as an NPC, but also a player.
@@ -398,6 +398,22 @@ namespace BlackRain.Common.Objects
         public float Distance
         {
             get { return (float)Point.Distance(ObjectManager.Me.Location, Location); }
+        }
+
+        /// <summary>
+        /// The distance horizontally.
+        /// </summary>
+        public float DistanceXY
+        {
+            get { return (float)Point.Distance(new Point(ObjectManager.Me.Location.X, ObjectManager.Me.Location.Y), new Point(Location.X, Location.Y)); }
+        }
+
+        /// <summary>
+        /// The distance vertically.
+        /// </summary>
+        public float DistanceZ
+        {
+            get { return (float)Point.Distance(new Point(0, 0, ObjectManager.Me.Location.Z), new Point(0, 0, Location.Z)); }
         }
 
 

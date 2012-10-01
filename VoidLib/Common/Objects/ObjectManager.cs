@@ -6,7 +6,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using Magic;
 
-namespace BlackRain.Common.Objects
+namespace VoidLib.Common.Objects
 {
     /// <summary>
     /// Manages all the BlackRain WowObjects, and maintains them.

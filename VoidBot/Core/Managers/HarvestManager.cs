@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using VoidLib;
-using BlackRain.Helpers;
-using BlackRain.Common;
+using VoidLib.Helpers;
+using VoidLib.Common;
 using Microsoft.Xna.Framework;
-using BlackRain.Common.Objects;
+using VoidLib.Common.Objects;
 using System.Threading;
 
 namespace VoidBot.Core.Managers
@@ -44,12 +44,7 @@ namespace VoidBot.Core.Managers
 
         public void harvestNode()
         {
-            if (int.Parse(LUAHelper.GetLUA("IsMounted()")) == 1)
-            {
-                LUAHelper.DoString("Dismount()");
-                Thread.Sleep(500);
-                CTMHelper.ClickToMove(node)
-            }
+           
         }
     }
 }

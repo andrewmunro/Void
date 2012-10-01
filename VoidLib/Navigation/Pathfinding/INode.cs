@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace BlackRain.Navigation.Pathfinding
+namespace VoidLib.Navigation.Pathfinding
 {
     public class PathNode
     {

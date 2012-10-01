@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using BlackRain.Common.Objects;
-using BlackRain.Helpers;
+using VoidLib.Common.Objects;
+using VoidLib.Helpers;
 
-namespace BlackRain.Utils
+namespace VoidLib.Utils
 {
     public class WorldUtils
     {

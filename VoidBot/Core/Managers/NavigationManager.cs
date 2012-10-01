@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
-using BlackRain.Helpers;
-using BlackRain.Common.Objects;
-using VoidLib;
+using VoidLib.Helpers;
+using VoidLib.Common.Objects;
 
 namespace VoidBot.Core.Managers
 {

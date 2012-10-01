@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using BlackRain.Common.Objects;
-using BlackRain.Helpers;
+using VoidLib.Common.Objects;
+using VoidLib.Helpers;
+using VoidLib.Utils;
 
-namespace VoidLib
+namespace VoidLib.Helpers
 {
     public class CTMHelper
     {
@@ -48,25 +49,6 @@ namespace VoidLib
             }
 
             ObjectManager.Write<uint>(ObjectManager.WowBaseAddress + (uint)CTM.CTM_Base + (uint)CTM.CTM_Push, (uint)action);
-        }
-
-        public static bool inRange(WowObject obj)
-        {
-            
-            LUAHelper.GetLUA("CheckInteractDistance(\"target\")");
-        }
-
-        public static void Interact(WowObject obj)
-        {
-
-            if (obj is WowUnit)
-            {
-                ClickToMove(obj.X, obj.Y, obj.Z, CTMAction.InteractNpc, obj.GUID);
-            } 
-            else 
-            {
-                ClickToMove(obj.X, obj.Y, obj.Z, CTMAction.InteractObject, obj.GUID);
-            }
         }
 
     }

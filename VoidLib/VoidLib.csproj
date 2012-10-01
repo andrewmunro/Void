@@ -8,7 +8,7 @@
     <ProjectGuid>{ECB797DC-902E-404A-B9BB-5356BC6AFFC4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BlackRain</RootNamespace>
+    <RootNamespace>VoidLib</RootNamespace>
     <AssemblyName>BlackRain</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

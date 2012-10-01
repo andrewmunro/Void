@@ -2,7 +2,7 @@
 using System.Xml.Linq;
 using System.Xml.Serialization;
 
-namespace BlackRain.Common
+namespace VoidLib.Common
 {
     /// <summary>
     /// A basic Point class. This provides a wrapper around the common Point type operations.

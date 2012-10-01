@@ -5,7 +5,7 @@ using System.Text;
 using System.Xml;
 using Microsoft.Xna.Framework;
 
-namespace BlackRain.Helpers
+namespace VoidLib.Helpers
 {
     public class ScriptHelper
     {

@@ -1,4 +1,4 @@
-namespace BlackRain.Common.Objects
+namespace VoidLib.Common.Objects
 {
     /// <summary>
     /// Represents your player (character).

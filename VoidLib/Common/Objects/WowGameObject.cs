@@ -1,4 +1,4 @@
-﻿namespace BlackRain.Common.Objects
+﻿namespace VoidLib.Common.Objects
 {
     /// <summary>
     /// A Game Object, such as a herb, but also a treasure box.

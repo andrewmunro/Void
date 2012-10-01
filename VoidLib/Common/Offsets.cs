@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BlackRain.Common
+namespace VoidLib.Common
 {
     /// <summary>
     /// A collection of offsets used for memory reading and writing.

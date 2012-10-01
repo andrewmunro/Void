@@ -1,5 +1,5 @@
 ﻿
-namespace BlackRain.Common.Objects
+namespace VoidLib.Common.Objects
 {
     /// <summary>
     /// Represents a player.
